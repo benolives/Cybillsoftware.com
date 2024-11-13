@@ -102,9 +102,30 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::get('register', function () {
+    //check if the user is logged in
+    if (Auth::check()) {
+        // Set a toast message in session
+        session()->flash('toast', 'You are already have an account and logged in!');
+        return redirect('/');
+    }
+    //otherwise sho the login page
+    return view('auth.register');
+})->name('register');
 Route::post('register', [RegisterController::class, 'register']);
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::get('/login', function () {
+    //check if the user is logged in
+    if (Auth::check()) {
+        // Set a toast message in session
+        session()->flash('toast', 'You are already logged in!');
+
+        //if logged in redirect user to home page with a message on a toast
+        return redirect('/');
+    }
+    //otherwise sho the login page
+    return view('auth.login');
+})->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 

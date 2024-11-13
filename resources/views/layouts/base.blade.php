@@ -20,6 +20,22 @@
          use Illuminate\Support\Facades\Request;
       @endphp
    </head>
+   <!-- This is a section that contains a script for a toast incase any request that comes with a
+   toast message this toast will show -->
+   @if(session('toast'))
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Toastify({
+                text: "{{ session('toast') }}",
+                duration: 3000,
+                gravity: "top",
+                position: 'center',
+                backgroundColor: "#28a745",
+                stopOnFocus: true
+            }).showToast();
+        })
+      </script>
+   @endif
    <body class="antialiased">
       <!--============================ HEADER SECTION =======================================-->
       <header id="header-section" class="header-section w-full h-[64px] flex justify-center fixed top-0 left-0 z-50 bg-transparent transition-all duration-200">

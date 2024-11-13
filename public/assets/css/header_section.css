@@ -1,7 +1,7 @@
 /* Background changes to white on scroll */
 .header-section.scrolled {
     background-color: #ffffff;
-    border-bottom: 1px solid var(--white);
+    border-bottom: 1px solid #000;
 }
 
 /*========================================================================================
@@ -21,7 +21,7 @@ content: '';
 position: absolute;
 left: 0;
 right: 0;
-bottom: -7px;
+bottom: 0;
 height: 1px;
 background-color: white;
 width: 100%;
@@ -39,7 +39,7 @@ content: '';
 position: absolute;
 left: 0;
 right: 0;
-bottom: -7px; /* Position it below the text */
+bottom: 0; /* Position it below the text */
 height: 1px; /* Thickness of the underline */
 background-color: white; /* Underline color */
 width: 100%; /* Full width */
