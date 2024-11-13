@@ -128,7 +128,7 @@
     </div>
 </section>
 <!--======================= Why Cybill Software Section ===================================-->
-<section class="py-16 bg-gradient-to-r from-[#394b62] to-[#5e6f83]">
+<section class="py-16 bg-[#2c2c64]">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-12">
@@ -142,64 +142,33 @@
 
         <!-- Grid of Reasons -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-3s">
-                <div class="icon bg-[#fc4b3b] text-white p-4 rounded-full mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 3a1 1 0 011-1h10a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V3z" clip-rule="evenodd" />
-                    </svg>
+            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-1s">
+                <div class="flex gap-2 items-center">
+                    <div class="icon bg-[green] text-white p-4 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#394b62] mb-2">Fast Access</h3>
                 </div>
-                <h3 class="text-xl font-semibold text-[#394b62] mb-2">Fast Access</h3>
                 <p class="text-[#747078]">Instant access to software downloads and activation codes for a quick start.</p>
             </div>
-
-            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-4s">
-                <div class="icon bg-[#fc4b3b] text-white p-4 rounded-full mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 3a1 1 0 011-1h10a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V3z" clip-rule="evenodd" />
-                    </svg>
+            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-2s">
+                <div class="flex gap-2 items-center">
+                    <div class="icon bg-[green] text-white p-4 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#394b62] mb-2">Secure Transactions</h3>
                 </div>
-                <h3 class="text-xl font-semibold text-[#394b62] mb-2">No Physical Delivery</h3>
-                <p class="text-[#747078]">All purchases are sent digitally—no waiting for shipping.</p>
-            </div>
-
-            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-5s">
-                <div class="icon bg-[#fc4b3b] text-white p-4 rounded-full mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M16 3a1 1 0 00-1 1v12a1 1 0 001 1h2a1 1 0 001-1V4a1 1 0 00-1-1h-2zm-6 0a1 1 0 00-1 1v12a1 1 0 001 1h2a1 1 0 001-1V4a1 1 0 00-1-1h-2z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold text-[#394b62] mb-2">Secure Transactions</h3>
                 <p class="text-[#747078]">Your transactions are always secure, with top-notch encryption protocols.</p>
             </div>
 
-            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-6s">
-                <div class="icon bg-[#fc4b3b] text-white p-4 rounded-full mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M4 5a1 1 0 011-1h10a1 1 0 011 1v10a1 1 0 01-1 1H5a1 1 0 01-1-1V5z" clip-rule="evenodd" />
-                    </svg>
+            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-2s">
+                <div class="flex gap-2 items-center">
+                    <div class="icon bg-[green] text-white p-4 rounded-full mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M440-120v-80h320v-284q0-117-81.5-198.5T480-764q-117 0-198.5 81.5T200-484v244h-40q-33 0-56.5-23.5T80-320v-80q0-21 10.5-39.5T120-469l3-53q8-68 39.5-126t79-101q47.5-43 109-67T480-840q68 0 129 24t109 66.5Q766-707 797-649t40 126l3 52q19 9 29.5 27t10.5 38v92q0 20-10.5 38T840-249v49q0 33-23.5 56.5T760-120H440Zm-80-280q-17 0-28.5-11.5T320-440q0-17 11.5-28.5T360-480q17 0 28.5 11.5T400-440q0 17-11.5 28.5T360-400Zm240 0q-17 0-28.5-11.5T560-440q0-17 11.5-28.5T600-480q17 0 28.5 11.5T640-440q0 17-11.5 28.5T600-400Zm-359-62q-7-106 64-182t177-76q89 0 156.5 56.5T720-519q-91-1-167.5-49T435-698q-16 80-67.5 142.5T241-462Z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-[#394b62] mb-2">Customer Support</h3>
                 </div>
-                <h3 class="text-xl font-semibold text-[#394b62] mb-2">Customer Support</h3>
                 <p class="text-[#747078]">Reliable support whenever you need help with any issues.</p>
-            </div>
-
-            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-7s">
-                <div class="icon bg-[#fc4b3b] text-white p-4 rounded-full mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 5.25a.75.75 0 01.75.75v8.875a.75.75 0 01-1.5 0V6a.75.75 0 01.75-.75zM5 10a.75.75 0 01.75-.75h8.5a.75.75 0 010 1.5h-8.5a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold text-[#394b62] mb-2">Wide Selection</h3>
-                <p class="text-[#747078]">Choose from a wide range of software that fits your needs.</p>
-            </div>
-
-            <div class="reason-card bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300 opacity-0 animate__animated animate__fadeIn animate__delay-8s">
-                <div class="icon bg-[#fc4b3b] text-white p-4 rounded-full mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5 9a1 1 0 01.75-.75h8.5a1 1 0 010 1.5h-8.5A1 1 0 015 9z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold text-[#394b62] mb-2">Affordable Pricing</h3>
-                <p class="text-[#747078]">Enjoy competitive prices without compromising on quality.</p>
             </div>
         </div>
     </div>

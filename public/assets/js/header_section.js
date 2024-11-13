@@ -1,5 +1,5 @@
 /*=============================================================================================
-                When we scroll we want the header to change background to white so
+                When we scroll we want the header to change background to white color so
                 that we can maintain contrast.
 ==============================================================================================*/
 document.addEventListener('DOMContentLoaded', function() {

@@ -52,10 +52,12 @@
                   <!-- User Account Section -->
                   <div class="relative hidden md:block">
                         @auth
-                           <button id="user-account-btn" class="flex items-center focus:outline-none">
-                              <img src="{{ Auth::user()->profile_image ?? asset('assets/img/anime.jpg') }}" alt="User Profile" class="h-10 w-10 rounded-full">
-                              <span class="ml-2 text-gray-700">{{ Auth::user()->name }}</span>
-                           </button>
+                           <div class="desktop-link">
+                              <button id="user-account-btn" class="flex items-center focus:outline-none">
+                                 <img src="{{ Auth::user()->profile_image ?? asset('assets/img/anime.jpg') }}" alt="User Profile" class="h-10 w-10 rounded-full">
+                                 <span class="ml-2">{{ Auth::user()->name }}</span>
+                              </button>
+                           </div>
                            <div id="user-account-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg hidden transition-opacity duration-200 ease-in-out">
                               <div class="py-2">
                                     <a href="/my-account" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200">My Page</a>
