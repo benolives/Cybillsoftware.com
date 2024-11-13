@@ -17,126 +17,6 @@
 
 
 @section('content')
-<!-- <section id="home_image_section" class="relative min-h-[510px] w-full">
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
-        <picture class="block h-full w-full">
-            <source srcset="{{ asset('assets/img/about_us.jpg') }}" media="(min-width: 1440px)">
-            <source srcset="{{ asset('assets/img/about_us.jpg') }}" media="(max-width: 640px)">
-            <img src="{{ asset('assets/img/about_us.jpg') }}" class="w-full h-full object-cover" alt="hero section background">
-        </picture>
-    </div>
-    <div class="img_overlay absolute top-0 left-0 w-full h-full bg-[rgba(25,27,38,0.7)]"></div>
-    <div class="content_section relative w-full flex items-center justify-center flex-col text-center min-h-[510px] px-[32px] text-white">
-        <div class="content-wrapper w-full max-w-[840px] flex flex-col items-start">
-            <h1 class="mb-2 text-[1.8rem] font-extrabold text-white capitalize text-center w-full">
-                Start Reselling & Earning with Cybill Software
-            </h1>
-            <p class="font-normal text-sm mb-6 text-white">
-                With Cybill Software, you can easily start reselling and earn commission with just a few clicks. Our platform is designed to help you maximize your earnings with a user-friendly interface, marketing tools, and comprehensive support.
-            </p>            
-            <div class="bg-white shadow-md border border-[#ebecf0] h-[56px] pl-6 rounded-full w-full flex items-center relative">
-                <form class="flex-1 flex items-center justify-center min-w-[32px]" action="#" method="get">
-                    <button class="flex items-center justify-center border-0 bg-none cursor-pointer text-[24px] text-[#00ab6b]" aria-label="Search products and partners">
-                        <span class="font-bold">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                            </svg>
-                        </span>
-                    </button>
-                    <input 
-                        type="search" 
-                        name="search" 
-                        placeholder="Search for products, partners, or sales opportunities..." 
-                        value="" 
-                        class="text-[#191b26] flex-1 p-2 border-0 bg-none m-0 min-w-[30px] text-[14px] focus:outline-none" 
-                    />
-                </form>
-                <div class="inline-flex relative overflow-visible text-left">
-                    <div class="flex">
-                        <button id="dropdownButton" class="mr-2 rounded-[56px] bg-transparent text-[rgba(25,27,38,.64)] border-0 h-[40px] px-4 
-                            inline-flex items-center justify-center cursor-pointer transition-all duration-100 ease-in text-none whitespace-nowrap font-semibold text-[14px]">
-                            <span class="label">All Products</span>
-                            <span class="ml-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                                        stroke="currentColor" stroke-width="1.3"/>
-                                </svg>
-                            </span>
-                        </button>
-                    </div>
-                
-                    <div id="dropdownMenu" class="text-[rgba(25,27,38,.64)] bg-white absolute top-[calc(100%+4px)] right-0 min-w-[216px] rounded-lg mt-1 hidden border shadow-lg z-[90]">
-                        <div class="flex flex-col p-3">
-                            <div class="dropdown-item flex items-center px-4 py-2 cursor-pointer">
-                                <span class="icon-image mr-2"></span>
-                                <label>All Products</label>
-                            </div>
-                            <div class="dropdown-item flex items-center px-4 py-2 border-t cursor-pointer">
-                                <span class="icon-photo mr-2"></span>
-                                <label>Antivirus Solutions</label>
-                            </div>
-                            <div class="dropdown-item flex items-center px-4 py-2 border-t cursor-pointer">
-                                <span class="icon-illustration mr-2"></span>
-                                <label>Security Products</label>
-                            </div>
-                            <div class="dropdown-item flex items-center px-4 py-2 border-t cursor-pointer">
-                                <span class="icon-partner mr-2"></span>
-                                <label>Partner Sales</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-10 flex items-center gap-x-6 justify-between w-full">
-                @if (auth()->check())
-                    <button class="md:block bg-[#fc4b3b] rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#fc4b3b]/90 focus-visible:outline">
-                        <a href="{{ route('about-us') }}" class="no-underline">
-                            <span class="text-sm leading-6">
-                                Learn more about us
-                                <img src="{{ asset('assets/img/arrow-right.svg') }}" alt="Arrow Right" class="inline-block h-4 w-4" />
-                            </span>
-                        </a>
-                    </button>
-                @else
-                    <button class="rounded-md bg-[#2c2c64] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#2c2c64]/90 focus-visible:outline focus-visible:outline-2">
-                        <a href="{{ route('register') }}" class="no-underline">Become a partner</a>
-                    </button>
-
-                    <button class="block md:hidden bg-[#fc4b3b] rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#fc4b3b]/90 focus-visible:outline">
-                        <a href="{{ route('login') }}" class="no-underline">
-                            <span class="leading-6">Sign In</span>
-                        </a>
-                    </button>
-                @endif
-            </div>           
-        </div>
-        <div class="learnMoreAboutUsContainer absolute left-8 bottom-6">
-                <a href="{{ route('about-us') }}" class="flex items-center gap-2 text-sm text-white">
-                    <span>Learn more about Us</span>
-                    <span class="flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-                        </svg>
-                    </span>
-                </a>
-        </div>
-         <div id="showHomeModal" class="relative w-[265px] flex items-center gap-x-4 p-4 text-md uppercase leading-6 text-white cursor-pointer">
-            <svg class="absolute top-0 left-0 w-full h-full fill-transparent">
-                <rect width="100%" height="100%" rx="10" ry="10"></rect>
-            </svg>
-            <span class="font-semibold">System Security</span>
-            <span class="flex items-center">
-                Home
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right ml-2" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                </svg>
-            </span>
-        </div>
-    </div>
-</section> -->
-
-
-
 <main>
     <!-- Hero section of the products page-->
     <section id="products-page-hero-section" class="relative min-h-[510px] w-full">
@@ -213,8 +93,7 @@
             </div>
         </div>
     </section>
-
-    
+        
     <!-- Category Buttons -->
     <div class="flex w-full items-center justify-center mt-4">
         <a href="{{ route('products.index') }}" 

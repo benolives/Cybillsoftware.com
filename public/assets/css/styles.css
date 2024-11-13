@@ -54,6 +54,27 @@
   }
 }
 
+
+/*========================================================================================
+                            THE SELECT PRODUCT PAGE CSS STYLING
+======================================================================================== */
+/* Add some custom animations */
+@keyframes slideIn {
+  0% {
+      transform: translateY(50px);
+      opacity: 0;
+  }
+
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: slideIn 0.6s ease-out forwards;
+}
+
 /*=============== BASE ===============*/
 * {
   box-sizing: border-box;
