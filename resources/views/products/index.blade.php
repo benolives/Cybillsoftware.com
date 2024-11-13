@@ -138,7 +138,7 @@
 
 
 <main>
-    <!-- Hero section -->
+    <!-- Hero section of the products page-->
     <section id="products-page-hero-section" class="relative min-h-[510px] w-full">
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
             <picture class="block h-full w-full">
