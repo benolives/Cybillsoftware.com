@@ -1,0 +1,44 @@
+/* Background changes to white on scroll */
+.header-section.scrolled {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--white);
+}
+
+/*========================================================================================
+                            HEADER SECTION OF THE APPLICATION
+======================================================================================== */
+.desktop-link {
+position: relative;
+text-decoration: none;
+font-weight: 500;
+}
+
+.desktop-link::after {
+content: '';
+position: absolute;
+left: 0;
+right: 0;
+bottom: -7px;
+height: 1px;
+background-color: white;
+width: 100%;
+transform: scaleX(0); /* Start with no width */
+transform-origin: left; /* Scale from the left */
+transition: transform 0.3 ease;
+}
+
+.desktop-link:hover::after {
+transform: scaleX(1); /* Expand to full width on hover */
+}
+  
+.desktop-link.active::after {
+content: '';
+position: absolute;
+left: 0;
+right: 0;
+bottom: -7px; /* Position it below the text */
+height: 1px; /* Thickness of the underline */
+background-color: white; /* Underline color */
+width: 100%; /* Full width */
+transform: scaleX(1);
+}

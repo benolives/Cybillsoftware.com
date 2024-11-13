@@ -1,0 +1,10 @@
+:root {
+  --blue: #2d2d72;
+  --yellow: #f5bf23;
+  --black: #111;
+  --white: #fff;
+  --light-color: #585757;
+  --light-bg: #d3cfcf;
+  --box-shadow: 0 0.5rem 1rem rgba(0,0,0,.1);
+  --border: .1rem solid rgba(0,0,0,.3);
+}

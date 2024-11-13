@@ -1,0 +1,192 @@
+
+
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap");
+
+/*=============== Import the toastify css file this will be used to style toasts ===============*/
+@import url('toastify.css');
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  /* --first-color: hsl(268, 58%, 48%); */
+  --first-color: hsl(243, 45%, 27%);
+  --first-color-alt: hsl(268, 28%, 38%);
+  /* --second-color: hsl(335, 88%, 56%); */
+  --second-color: 	hsl(8, 84%, 57%);
+  /* --second-color-alt: hsl(328, 78%, 38%); */
+  --second-color-alt: 	hsl(8, 64%, 47%);
+  --title-color: hsl(0, 0%, 100%);
+  --text-color: hsl(0, 0%, 20%);
+  --body-color: hsl(268, 58%, 22%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --secondary-font: "Montserrat", sans-serif;
+  --body-font: "Robot", sans-serif;
+  --biggest-font-size: 2rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1152px) {
+  :root {
+    --biggest-font-size: 4rem;
+    --h3-font-size: 1.125rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+  }
+  .container-class {
+    margin-inline: auto;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-medium);
+  /* background-color: var(--body-color); */
+  background-color: rgb(243 244 246);
+  color: var(--text-color);
+}
+
+/* CSS to prevent scrolling */
+.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
+#confirmationModal,
+#stkPushModal {
+  z-index: 1000; /* Adjust this value as needed */
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* You can customize the appearance of the modal here */
+#customAlert {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+#customAlert.show {
+  opacity: 1;
+}
+
+/**************modals Animation **********************/
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.9); }
+}
+
+.modal-enter {
+  animation: fadeIn 0.3s forwards;
+}
+
+.modal-exit {
+  animation: fadeOut 0.3s forwards;
+}
+
+/*This is to ensure our modal is completely outside the screen view when not being viewed*/
+.custom-translate-y {
+  transform: translateY(-160%);
+}
+
+#info-modal.show {
+  display: flex;
+}
+#modal-content.show{
+  transform: translateY(0);
+}
+
+/*========================================================================================
+                              SHOW MODAL FOR THE HOME PAGE SECTION
+======================================================================================== */
+
+#showHomeModal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+}
+
+#showHomeModal svg rect {
+  stroke-width: 3;
+  stroke: #fff;
+  stroke-dasharray: 100;
+  animation: animate 2s linear infinite;
+}
+
+/* animation for the showModel part */
+@keyframes animate {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container-class {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+.main {
+  overflow: hidden; /* For animation */
+}
+
+
+
+
+/* NAV DROPDOWN */
+.dropdown {
+  position: relative;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
