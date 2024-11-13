@@ -1,0 +1,50 @@
+/* Container for all sprinkles */
+#sprinkles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none; /* Ensure it doesn't block any interaction */
+}
+
+/* No changes to this base class as we're already styling the balls in JS */
+#sprinkles-container .sprinkle {
+    position: absolute;
+    border-radius: 50%; /* Makes them round */
+    z-index: 0; /* Ensure they appear behind content */
+    animation: scatter 5s ease-in-out infinite;
+}
+
+/* Keyframe animation for random scatter */
+@keyframes scatter {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(100px, -100px);
+    }
+    50% {
+        transform: translate(-100px, 100px);
+    }
+    75% {
+        transform: translate(50px, 150px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Media query to control sprinkle size and density on mobile */
+@media (max-width: 768px) {
+    /* Adjust the sprinkle size on mobile (smaller balls) */
+    #sprinkles-container .sprinkle {
+        width: 15px;
+        height: 15px;
+    }
+    
+    /* Reduce number of sprinkles on mobile */
+    #sprinkles-container {
+        opacity: 0.8;  /* Optional: Make them less intense on mobile */
+    }
+}

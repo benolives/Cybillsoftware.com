@@ -7,12 +7,10 @@
     <!--=============== FAVICON ===============-->
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
 
-    <!--=============== BOXICONS ===============-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
     <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app-CmYmiJCz.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/auth_base.css') }}">
 
     <title>Cybill Software | Revollutionary Repackaged | Buy Antivirus Software Online</title>
 
@@ -34,6 +32,8 @@
         <!-- New rounded div at the bottom right -->
         <div class="absolute z-0 w-32 h-32 bg-[#fc4b3b] rounded-full right-10 bottom-10"></div>
 
+        <!-- Container for random sprinkles -->
+        <div id="sprinkles-container"></div>
         <!--==================== HOME ====================-->
         @yield('content')
 
@@ -41,6 +41,7 @@
     </main>
     <!--=============== MAIN JS ===============-->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/auth_base.js') }}"></script>
     <script src="/build/assets/app-2m5-0K_5.js" defer></script>
     @stack('scripts')   
 </body>
