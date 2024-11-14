@@ -132,7 +132,7 @@
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-12">
-            <h2 class="text-4xl md:text-5xl font-semibold text-white mb-4 opacity-0 animate__animated animate__fadeIn animate__delay-1s">
+            <h2 class="text-4xl md:text-5xl font-semibold text-white mb-4 animate__animated animate__bounce">
                 Why Choose <span class="text-[#fc4b3b]">Us</span>
             </h2>
             <p class="text-lg text-white opacity-0 animate__animated animate__fadeIn animate__delay-2s max-w-3xl mx-auto">
@@ -174,43 +174,36 @@
     </div>
 </section>
 
-<!-- Testimonials Section -->
-<section class="bg-gray-100 py-16">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-2xl font-semibold text-[#394b62] mb-6">What Our Users Say</h2>
-        <div class="flex justify-center gap-6">
-            <div class="w-[300px] p-6 bg-white shadow-lg rounded-lg">
-                <p class="text-gray-600 mb-4">"Cybill Software helped me grow my business quickly and easily. The platform is simple to use, and the support team is top-notch!"</p>
-                <p class="font-semibold">John Doe</p>
-                <span class="text-sm text-gray-500">Reseller</span>
-            </div>
-            <div class="w-[300px] p-6 bg-white shadow-lg rounded-lg">
-                <p class="text-gray-600 mb-4">"The marketing tools provided by Cybill Software allowed me to focus more on sales. I’ve seen a significant increase in commissions."</p>
-                <p class="font-semibold">Jane Smith</p>
-                <span class="text-sm text-gray-500">Partner</span>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Blog Section -->
-<section class="py-16">
-    <div class="max-w-7xl mx-auto px-6">
+<section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-semibold text-[#394b62]">Latest Insights</h2>
-            <p class="text-base text-[#747078]">Stay up-to-date with the latest trends and tips for resellers in the software industry.</p>
+            <h2 class="text-3xl font-semibold text-gray-800">
+                Latest 
+                <span class="text-[#fc4b3b]">Insights</span>
+            </h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto">Stay up-to-date with the latest trends and tips in the cybersecurity world.</p>
         </div>
-        <div class="flex flex-wrap justify-center gap-6">
-            <div class="w-[300px] p-6 bg-white shadow-lg rounded-lg">
-                <h3 class="font-semibold text-[#fc4b3b]">How to Maximize Your Reseller Earnings</h3>
-                <p class="text-gray-600 mt-2">Learn the best practices to maximize your earnings and grow your business with Cybill Software.</p>
-                <a href="#" class="text-[#fc4b3b] mt-4 block">Read More</a>
-            </div>
-            <div class="w-[300px] p-6 bg-white shadow-lg rounded-lg">
-                <h3 class="font-semibold text-[#fc4b3b]">Understanding the Power of Partner Sales</h3>
-                <p class="text-gray-600 mt-2">Discover the benefits of becoming a partner and selling high-demand software products.</p>
-                <a href="#" class="text-[#fc4b3b] mt-4 block">Read More</a>
-            </div>
+
+        <!-- Blog Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($blogs as $blog)
+                <div class="bg-white shadow-lg rounded-lg pb-8">
+                    <!-- Image without padding and full width -->
+                    <img src="{{ $blog['image'] }}" alt="Blog Image" class="w-full h-48 object-cover rounded-t-lg">
+                    
+                    <!-- Title in black -->
+                    <h3 class="font-semibold text-black mt-4 px-6">{{ $blog['title'] }}</h3>
+                    
+                    <!-- Excerpt with a max of 3 lines and ellipsis -->
+                    <p class="text-gray-600 mt-2 truncate-line-3 px-6">{{ $blog['excerpt'] }}</p>
+
+                    <p class="text-sm text-gray-500 mt-2 px-6">By {{ $blog['author'] }} | {{ $blog['date'] }}</p>
+                    
+                    <!-- Read more link -->
+                    <a href="{{ route('blogs.show', $blog['slug']) }}" class="text-[#fc4b3b] mt-4 block px-6">Read More</a>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>

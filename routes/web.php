@@ -25,6 +25,7 @@ use App\Http\Controllers\AdminDashboardController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\BlogController;
 
 
 /*
@@ -273,3 +274,11 @@ Route::get('/fetch', function (KasperskyBenOlivesApiService $kasperskyService) {
     }
 });
 
+/*========================================================================================\
+             THIS IS THE BLOGS ROUTE. FOR NOw it is hardcoded but we will will implement
+             dynamic content using The News Api it has a free tier version
+             that can handle 100 requests per day. and We will only need probably
+             One request daily based on how we structure the application
+\*========================================================================================*/
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');

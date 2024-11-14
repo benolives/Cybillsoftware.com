@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\BlogController;
+
 /**
  * Class AppController
  * 
@@ -21,7 +23,10 @@ class AppController extends Controller
      */
     public function index()
     {
-        return view('index');
+        // Get the latest blogs from the BlogController (you can also directly fetch them here)
+        $blogs = (new BlogController())->getLatestBlogs();
+
+        return view('index', ['blogs' => $blogs]);
     }
     public function show_About_us()
     {
