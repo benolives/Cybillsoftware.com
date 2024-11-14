@@ -238,7 +238,7 @@
                 </div>
 
                 <!-- Modal for Each Step -->
-                <div id="modal-{{ $loop->index }}" class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center">
+                <div id="modal-{{ $loop->index }}" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center">
                     <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-lg mx-auto">
                         <h3 class="font-semibold text-xl text-[#394b62]">{{ $step['title'] }}</h3>
                         <p class="text-gray-600 mt-2">{{ $step['more_info'] }}</p>
@@ -250,88 +250,162 @@
             @endforeach
         </div>
     </div>
+    <script>
+        // Function to open the modal
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        // Function to close the modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+    </script>
 </section>
 
-<script>
-// Function to open the modal
-function openModal(modalId) {
-    document.getElementById(modalId).classList.remove('hidden');
-}
-
-// Function to close the modal
-function closeModal(modalId) {
-    document.getElementById(modalId).classList.add('hidden');
-}
-</script>
-
-
-
-<!-- Floating Tutorial Button with Animation -->
-<div class="fixed bottom-8 right-8 z-50 flex flex-col items-center">
-    <a href="#tutorialVideo" class="tutorial-button bg-[#fc4b3b] text-white rounded-full p-4 shadow-lg flex items-center justify-center hover:bg-[#fc4b3b]/80 transform transition-all duration-300 ease-in-out scale-110">
+<!--==================== Floating Tutorial Button with Animation ============================-->
+<div class="fixed bottom-10 right-8 z-50 flex flex-col items-center">
+    <a href="#tutorialVideo" class="tutorial-button bg-[#fc4b3b] text-white rounded-full p-4 shadow-lg flex items-center justify-center transform transition-all duration-300 ease-in-out scale-110">
         <!-- Play Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
-            <path d="M11.742 7.742a1 1 0 0 0 0-1.414L6.586 2.343a1 1 0 0 0-1.414 1.414L9.5 7.5 5.172 11.829a1 1 0 0 0 1.414 1.414l5.172-5.172a1 1 0 0 0 0-1.414z"/>
-        </svg>
+        <span class="ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m380-300 280-180-280-180v360ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+        </span>
         <!-- Text Underneath (optional) -->
-        <span class="text-xs mt-2 font-semibold text-white">Watch Tutorial</span>
+        <span class="text-xs font-semibold text-white">Watch Demo</span>
     </a>
 </div>
 
-<!-- Tutorial Video Section (Anchored) -->
+<!--======================= Tutorial Video Section (Anchored) ===============================-->
 <section id="tutorialVideo" class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-semibold text-[#394b62] mb-6">How to Get Started with Cybill Software</h2>
-        <p class="text-base text-[#747078] mb-8">Watch this quick tutorial to learn how to start reselling and earning with Cybill Software.</p>
-        <div class="w-full max-w-[640px] mx-auto">
-            <iframe class="w-full h-[360px]" src="https://www.youtube.com/embed/example_video_id" frameborder="0" allowfullscreen></iframe>
+        <div class="mb-[5rem]">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">How to Get Started with <span class="text-[#fc4b3b]">Cybill software</span></h2>
+            <p class="text-base text-gray-600">
+                Watch this quick tutorial to learn how to start reselling and earning with Cybill Software.
+            </p>
+        </div>
+
+        <!-- Video Embed -->
+        <div class="relative w-full max-w-[800px] mx-auto">
+            <!-- Video Container with Border & Shadow -->
+            <div class="bg-[#fc4b3b] p-2 rounded-xl shadow-lg hover:shadow-2xl transform transition duration-500 ease-in-out">
+                <!-- Video Embed (Maintained from previous solution) -->
+                <iframe 
+                    class="w-full h-[450px] rounded-lg"
+                    src="https://www.youtube.com/embed/aIHJYJsqRJk" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                >
+                </iframe>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Styling for the Floating Button -->
-<style>
-    /* Floating Button Animation */
-    .tutorial-button {
-        position: fixed;
-        bottom: 8%;
-        right: 8%;
-        z-index: 100;
-        animation: bounce 1.5s ease-in-out infinite;
-    }
-
-    /* Bouncing Animation */
-    @keyframes bounce {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-10px);
-        }
-    }
-
-    /* Optional Hover Effect */
-    .tutorial-button:hover {
-        transform: scale(1.2);
-    }
-</style>
-
+<!--================================== TFAQ SECTION ========================================-->
 <!-- FAQ Section -->
-<section class="py-16 bg-gray-100">
+<!-- FAQ Section -->
+<section id="faq" class="py-16 bg-[#F4F7FA]">
     <div class="max-w-7xl mx-auto px-6 text-center">
         <h2 class="text-3xl font-semibold text-[#394b62] mb-6">Frequently Asked Questions</h2>
+        
         <div class="max-w-3xl mx-auto">
-            <div class="bg-white shadow-lg rounded-lg p-6 mb-4">
-                <h3 class="font-semibold text-[#fc4b3b]">How do I become a reseller?</h3>
-                <p class="text-gray-600 mt-2">Simply sign up on our platform, and you'll get access to all the tools and resources you need to start reselling.</p>
+            <!-- FAQ Item 1 -->
+            <div class="bg-white shadow-lg rounded-lg mb-4">
+                <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-1')">
+                    <h3 class="font-semibold text-[#fc4b3b]">How do I become a reseller?</h3>
+                    <svg id="faq-icon-1" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="faq-1" class="px-6 pb-6 text-gray-600 hidden">
+                    <p>Simply sign up on our platform, and you'll get access to all the tools and resources you need to start reselling.</p>
+                </div>
             </div>
-            <div class="bg-white shadow-lg rounded-lg p-6 mb-4">
-                <h3 class="font-semibold text-[#fc4b3b]">What commission can I expect?</h3>
-                <p class="text-gray-600 mt-2">We offer competitive commissions depending on the products you sell. You'll receive detailed reports on your earnings in your dashboard.</p>
+
+            <!-- FAQ Item 2 -->
+            <div class="bg-white shadow-lg rounded-lg mb-4">
+                <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-2')">
+                    <h3 class="font-semibold text-[#fc4b3b]">What commission can I expect?</h3>
+                    <svg id="faq-icon-2" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="faq-2" class="px-6 pb-6 text-gray-600 hidden">
+                    <p>We offer competitive commissions depending on the products you sell. You'll receive detailed reports on your earnings in your dashboard.</p>
+                </div>
             </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="bg-white shadow-lg rounded-lg mb-4">
+                <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-3')">
+                    <h3 class="font-semibold text-[#fc4b3b]">How can I track my earnings?</h3>
+                    <svg id="faq-icon-3" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="faq-3" class="px-6 pb-6 text-gray-600 hidden">
+                    <p>You can easily track your earnings and commissions from your dashboard, with detailed reports and charts.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 (NEW) -->
+            <div class="bg-white shadow-lg rounded-lg mb-4">
+                <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-4')">
+                    <h3 class="font-semibold text-[#fc4b3b]">How do I get paid?</h3>
+                    <svg id="faq-icon-4" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="faq-4" class="px-6 pb-6 text-gray-600 hidden">
+                    <p>You will receive your earnings via bank transfer or payment services, based on your preferences set up in your dashboard.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 5 (NEW) -->
+            <div class="bg-white shadow-lg rounded-lg mb-4">
+                <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-5')">
+                    <h3 class="font-semibold text-[#fc4b3b]">Can I sell multiple products?</h3>
+                    <svg id="faq-icon-5" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="faq-5" class="px-6 pb-6 text-gray-600 hidden">
+                    <p>Yes! You can sell as many products as you'd like, and earn commissions on each one sold.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 6 (NEW) -->
+            <div class="bg-white shadow-lg rounded-lg mb-4">
+                <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-6')">
+                    <h3 class="font-semibold text-[#fc4b3b]">How do I install the software?</h3>
+                    <svg id="faq-icon-6" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div id="faq-6" class="px-6 pb-6 text-gray-600 hidden">
+                    <p>Once you make a purchase, your client will receive a product activation code and installation instructions via email.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
+
+<script>
+    // Function to toggle FAQ visibility and change icon rotation
+    function toggleFaq(faqId) {
+        const faqContent = document.getElementById(faqId);
+        const faqIcon = document.getElementById(`faq-icon-${faqId.split('-')[1]}`);
+
+        // Toggle visibility of FAQ content
+        faqContent.classList.toggle('hidden');
+
+        // Rotate icon on click
+        faqIcon.classList.toggle('rotate-180');
+    }
+</script>
 
 <!-- feature top products -->
 <section class="py-16 bg-white">
@@ -356,51 +430,6 @@ function closeModal(modalId) {
                 <h3 class="font-semibold text-[#fc4b3b]">Product 3</h3>
                 <p class="text-gray-600 mt-2">Description of the product that you can sell and earn from. High demand and great commissions.</p>
                 <a href="#" class="text-[#fc4b3b] mt-4 block">Learn More</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Becoming a cybill software patrner -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-semibold text-[#394b62] mb-6">Become a Cybill Software Partner</h2>
-        <p class="text-base text-[#747078] mb-8">Our partner program is designed to reward those who help us grow by reselling our products.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div class="p-6 bg-white shadow-md rounded-lg">
-                <h3 class="text-[#fc4b3b] font-semibold">Earn High Commissions</h3>
-                <p class="text-gray-600 mt-2">Earn competitive commissions on every sale you make. The more you sell, the more you earn!</p>
-            </div>
-            <div class="p-6 bg-white shadow-md rounded-lg">
-                <h3 class="text-[#fc4b3b] font-semibold">Marketing Tools</h3>
-                <p class="text-gray-600 mt-2">Get access to a suite of marketing materials to help you sell our products more effectively.</p>
-            </div>
-            <div class="p-6 bg-white shadow-md rounded-lg">
-                <h3 class="text-[#fc4b3b] font-semibold">Dedicated Support</h3>
-                <p class="text-gray-600 mt-2">Our dedicated partner support team is always available to help you with any questions or challenges.</p>
-            </div>
-        </div>
-        <a href="{{ route('register') }}" class="mt-8 inline-block bg-[#fc4b3b] text-white font-semibold py-2 px-6 rounded-full">Join Now</a>
-    </div>
-</section>
-
-<!-- success stories -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-semibold text-[#394b62] mb-6">Success Stories</h2>
-        <p class="text-base text-[#747078] mb-8">Learn how Cybill Software has helped resellers grow their business and increase their earnings.</p>
-        <div class="flex justify-center gap-6">
-            <div class="w-[300px] p-6 bg-gray-100 rounded-lg shadow-md">
-                <img src="{{ asset('assets/img/success1.jpg') }}" alt="Success Story 1" class="w-full h-[180px] object-cover rounded-md mb-4">
-                <h3 class="font-semibold text-[#fc4b3b]">John's Journey</h3>
-                <p class="text-gray-600 mt-2">John started reselling Cybill Software products last year and saw his sales increase by 50% in just 6 months.</p>
-                <a href="#" class="text-[#fc4b3b] mt-4 block">Read Full Story</a>
-            </div>
-            <div class="w-[300px] p-6 bg-gray-100 rounded-lg shadow-md">
-                <img src="{{ asset('assets/img/success2.jpg') }}" alt="Success Story 2" class="w-full h-[180px] object-cover rounded-md mb-4">
-                <h3 class="font-semibold text-[#fc4b3b]">Jane's Growth</h3>
-                <p class="text-gray-600 mt-2">After becoming a partner, Jane doubled her commissions within the first three months, thanks to our marketing resources.</p>
-                <a href="#" class="text-[#fc4b3b] mt-4 block">Read Full Story</a>
             </div>
         </div>
     </div>

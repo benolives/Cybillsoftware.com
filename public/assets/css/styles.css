@@ -6,6 +6,10 @@
 /*=============== Import the toastify css file this will be used to style toasts ===============*/
 @import url('toastify.css');
 
+html {
+  scroll-behavior: smooth;
+}
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   --header-height: 3.5rem;
