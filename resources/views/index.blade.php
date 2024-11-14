@@ -174,7 +174,7 @@
     </div>
 </section>
 
-<!-- Blog Section -->
+<!--================================= Blog Section ==========================================-->
 <section class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-12">
@@ -198,7 +198,7 @@
                     <!-- Excerpt with a max of 3 lines and ellipsis -->
                     <p class="text-gray-600 mt-2 truncate-line-3 px-6">{{ $blog['excerpt'] }}</p>
 
-                    <p class="text-sm text-gray-500 mt-2 px-6">By {{ $blog['author'] }} | {{ $blog['date'] }}</p>
+                    <p class="text-sm text-[#2c2c64] font-semibold mt-3 px-6">By {{ $blog['author'] }} . {{ $blog['date'] }}</p>
                     
                     <!-- Read more link -->
                     <a href="{{ route('blogs.show', $blog['slug']) }}" class="text-[#fc4b3b] mt-4 block px-6">Read More</a>
@@ -208,27 +208,63 @@
     </div>
 </section>
 
-<!-- How It Works Section -->
-<section class="py-16 bg-gray-50">
+<!--============================= How It Works Section =======================================-->
+<section class="py-16 bg-gray-100">
     <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-semibold text-[#394b62] mb-6">How It Works</h2>
-        <p class="text-base text-[#747078] mb-8">Get started with Cybill Software in just a few simple steps!</p>
-        <div class="flex justify-center gap-12">
-            <div class="w-[250px]">
-                <h3 class="font-semibold text-[#fc4b3b]">Step 1: Sign Up</h3>
-                <p class="text-gray-600 mt-2">Create your account and gain access to our reseller platform.</p>
-            </div>
-            <div class="w-[250px]">
-                <h3 class="font-semibold text-[#fc4b3b]">Step 2: Choose Products</h3>
-                <p class="text-gray-600 mt-2">Select from a range of software products to resell and earn commissions.</p>
-            </div>
-            <div class="w-[250px]">
-                <h3 class="font-semibold text-[#fc4b3b]">Step 3: Start Selling</h3>
-                <p class="text-gray-600 mt-2">Use our marketing tools to start selling and earning right away!</p>
-            </div>
+        <div class="mb-[5rem]">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">How <span class="text-[#fc4b3b]">Cybill software</span> Works</h2>
+            <p class="text-base text-gray-600">Get started with Cybill Software in just a few simple steps!</p>
+        </div>
+        <!-- Step-by-Step Cards (Using Grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($howItWorksSteps as $step)
+                <div class="relative bg-white shadow-lg rounded-lg p-8 text-center transform transition duration-500 ease-in-out hover:scale-105 hover:shadow-2xl mb-8">
+                    <!-- Icon Section (Positioned over card) -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 -top-10 w-20 h-20 md:w-24 md:h-24 bg-[green] rounded-full flex justify-center items-center border-4 border-gray-100 shadow-lg">
+                        <!-- Output the SVG directly -->
+                        {!! $step['svg'] !!}
+                    </div>
+
+                    <!-- Title Section -->
+                    <h3 class="font-semibold text-xl text-[#394b62] mb-2 mt-16">{{ $step['title'] }}</h3>
+
+                    <!-- Description Section -->
+                    <p class="text-gray-600 text-sm mb-4">{{ $step['description'] }}</p>
+
+                    <!-- Learn More Button -->
+                    <div>
+                        <button class="text-[#fc4b3b] text-sm font-medium" onclick="openModal('modal-{{ $loop->index }}')">Learn more</button>
+                    </div>
+                </div>
+
+                <!-- Modal for Each Step -->
+                <div id="modal-{{ $loop->index }}" class="modal hidden fixed inset-0 bg-gray-600 bg-opacity-50 z-50 flex justify-center items-center">
+                    <div class="modal-content bg-white rounded-lg shadow-lg p-6 w-3/4 max-w-lg mx-auto">
+                        <h3 class="font-semibold text-xl text-[#394b62]">{{ $step['title'] }}</h3>
+                        <p class="text-gray-600 mt-2">{{ $step['more_info'] }}</p>
+                        <div class="mt-4 text-right">
+                            <button class="bg-[#fc4b3b] text-white px-4 py-2 rounded-lg" onclick="closeModal('modal-{{ $loop->index }}')">Close</button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>
+
+<script>
+// Function to open the modal
+function openModal(modalId) {
+    document.getElementById(modalId).classList.remove('hidden');
+}
+
+// Function to close the modal
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+}
+</script>
+
+
 
 <!-- Floating Tutorial Button with Animation -->
 <div class="fixed bottom-8 right-8 z-50 flex flex-col items-center">
