@@ -172,6 +172,12 @@
                                 </span>
                                 <h4 class="text-section">Transactions</h4>
                             </li>
+                            <li class="nav-item transaction_history">
+                                <a data-bs-toggle="collapse" href="#maps">
+                                    <i class="fa-solid fa-money-check"></i>
+                                    <p>Transaction history</p>
+                                </a>
+                            </li>
                             <li class="nav-item sales">
                                 <a data-bs-toggle="collapse" href="#maps">
                                     <i class="fa-solid fa-money-check"></i>
@@ -300,61 +306,49 @@
                     </nav>
                     <!-- End Navbar -->
                 </div>
-
                 <div class="container">
-                <div class="page-inner">
-                    <div class="page-header">
-                    <h4 class="page-title">Dashboard</h4>
-                    <ul class="breadcrumbs">
-                        <li class="nav-home">
-                        <a href="#">
-                            <i class="icon-home"></i>
-                        </a>
-                        </li>
-                        <li class="separator">
-                        <i class="icon-arrow-right"></i>
-                        </li>
-                        <li class="nav-item">
-                        <a href="#">Pages</a>
-                        </li>
-                        <li class="separator">
-                        <i class="icon-arrow-right"></i>
-                        </li>
-                        <li class="nav-item">
-                        <a href="#">Starter Page</a>
-                        </li>
-                    </ul>
+                    <div class="page-inner">
+                        <div class="page-header">
+                        <h4 class="page-title">Dashboard</h4>
+                        <ul class="breadcrumbs">
+                            <li class="nav-home">
+                            <a href="#">
+                                <i class="icon-home"></i>
+                            </a>
+                            </li>
+                            <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                            </li>
+                            <li class="nav-item">
+                            <a href="#">Pages</a>
+                            </li>
+                            <li class="separator">
+                            <i class="icon-arrow-right"></i>
+                            </li>
+                            <li class="nav-item">
+                            <a href="#">Starter Page</a>
+                            </li>
+                        </ul>
+                        </div>
+                        <div class="page-category">Inner page content goes here</div>
                     </div>
-                    <div class="page-category">Inner page content goes here</div>
-                </div>
                 </div>
 
+                <!-- Footer section starts here -->
                 <footer class="footer">
-                <div class="container-fluid d-flex justify-content-between">
-                    <nav class="pull-left">
-                    <ul class="nav">
-                        <li class="nav-item">
-                        <a class="nav-link" href="http://www.themekita.com">
-                            ThemeKita
-                        </a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="#"> Help </a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="#"> Licenses </a>
-                        </li>
-                    </ul>
-                    </nav>
-                    <div class="copyright">
-                    2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                    <a href="http://www.themekita.com">ThemeKita</a>
+                    <div class="container-fluid d-flex justify-content-between">
+                        <nav class="pull-left">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#"> Help </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="copyright">
+                            2024, made with <i class="fa fa-heart heart text-danger"></i> by
+                            <a href="http://www.themekita.com">Cybill Team</a>
+                        </div>
                     </div>
-                    <div>
-                    Distributed by
-                    <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
-                    </div>
-                </div>
                 </footer>
             </div>
         </div>
