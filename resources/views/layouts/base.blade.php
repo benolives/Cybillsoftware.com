@@ -62,7 +62,7 @@
                   </a>
                   @auth
                   <a href="/my-account" class="desktop-link text-white">
-                     My Page
+                     My Dashboard
                   </a>
                   @endauth
                   <!-- User Account Section -->

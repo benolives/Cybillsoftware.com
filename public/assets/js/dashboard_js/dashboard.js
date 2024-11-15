@@ -105,3 +105,48 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('no-scroll');
     }
 })
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Select all sidebar links
+    const sidebarLinks = document.querySelectorAll('.sidebar .menu li a');
+    
+    // Add click event listener to each sidebar link
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            // Prevent the default link behavior (no page reload)
+            e.preventDefault();
+
+            // Get the URL of the clicked link
+            const url = this.getAttribute('href');
+            console.log(url)
+
+            // Call the function to load the content dynamically
+            loadContent(url);
+        });
+    });
+
+    // Function to load content dynamically into the main content area
+    function loadContent(url) {
+        const contentArea = document.getElementById('content-area');
+        contentArea.innerHTML = 'Loading...'; // Optional: Show loading text or a spinner
+
+        // Create a new AJAX request using the Fetch API
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    return response.text(); // Return the response text (HTML content)
+                }
+                throw new Error('Network response was not ok');
+            })
+            .then(data => {
+                // Inject the content into the #content-area div
+                contentArea.innerHTML = data;
+            })
+            .catch(error => {
+                // If there's an error, display a fallback message
+                contentArea.innerHTML = 'Error loading content. Please try again.';
+                console.error('There was an error with the fetch operation:', error);
+            });
+    }
+});

@@ -21,7 +21,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductsController;
@@ -166,7 +166,33 @@ Route::middleware(['auth', 'verified'])->group(function() {
 /*========================================================================================\
                                 ADMIN dashboard Route
 \*========================================================================================*/
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'showAdminDashboard'])->name('admin.dashboard');
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    // Dashboard route
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    
+    // Clients route
+    Route::get('/clients', [AdminController::class, 'clients'])->name('admin.clients');
+
+    // Orders route
+    Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
+
+    // Users route
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+
+    // Product management routes
+    Route::get('/categories', [AdminController::class, 'categories'])->name('admin.categories');
+    Route::get('/features', [AdminController::class, 'features'])->name('admin.features');
+    Route::get('/product-keys', [AdminController::class, 'productKeys'])->name('admin.product-keys');
+    Route::get('/products', [AdminController::class, 'products'])->name('admin.products');
+
+    // Transactions routes
+    Route::get('/sales', [AdminController::class, 'sales'])->name('admin.sales');
+    Route::get('/profits', [AdminController::class, 'profits'])->name('admin.profits');
+    Route::get('/commissions', [AdminController::class, 'commissions'])->name('admin.commissions');
+    
+    // Notifications route (optional)
+    Route::get('/notifications', [AdminController::class, 'notifications'])->name('admin.notifications');
+});
 
 /*========================================================================================\
                                 The Mpesa STKPUSH/MPESA EXPRESS payment Routes... 

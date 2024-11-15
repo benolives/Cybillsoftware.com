@@ -288,7 +288,7 @@
         <!-- Video Embed -->
         <div class="relative w-full max-w-[800px] mx-auto">
             <!-- Video Container with Border & Shadow -->
-            <div class="bg-[#fc4b3b] p-2 rounded-xl shadow-lg hover:shadow-2xl transform transition duration-500 ease-in-out">
+            <div class="bg-[#fc4b3b] p-[3px] rounded-xl shadow-lg hover:shadow-2xl transform transition duration-500 ease-in-out">
                 <!-- Video Embed (Maintained from previous solution) -->
                 <iframe 
                     class="w-full h-[450px] rounded-lg"
@@ -303,9 +303,7 @@
     </div>
 </section>
 
-<!--================================== TFAQ SECTION ========================================-->
-<!-- FAQ Section -->
-<!-- FAQ Section -->
+<!--================================== FAQ SECTION ========================================-->
 <section id="faq" class="py-16 bg-[#F4F7FA]">
     <div class="max-w-7xl mx-auto px-6 text-center">
         <h2 class="text-3xl font-semibold text-[#394b62] mb-6">Frequently Asked Questions</h2>
@@ -314,8 +312,8 @@
             <!-- FAQ Item 1 -->
             <div class="bg-white shadow-lg rounded-lg mb-4">
                 <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-1')">
-                    <h3 class="font-semibold text-[#fc4b3b]">How do I become a reseller?</h3>
-                    <svg id="faq-icon-1" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <h3 class="font-semibold text-[#2c2c64]">How do I become a reseller?</h3>
+                    <svg id="faq-icon-1" class="w-6 h-6 text-[#2c2c64] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
@@ -327,8 +325,8 @@
             <!-- FAQ Item 2 -->
             <div class="bg-white shadow-lg rounded-lg mb-4">
                 <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-2')">
-                    <h3 class="font-semibold text-[#fc4b3b]">What commission can I expect?</h3>
-                    <svg id="faq-icon-2" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <h3 class="font-semibold text-[#2c2c64]">What commission can I expect?</h3>
+                    <svg id="faq-icon-2" class="w-6 h-6 text-[#2c2c64] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
@@ -340,8 +338,8 @@
             <!-- FAQ Item 3 -->
             <div class="bg-white shadow-lg rounded-lg mb-4">
                 <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-3')">
-                    <h3 class="font-semibold text-[#fc4b3b]">How can I track my earnings?</h3>
-                    <svg id="faq-icon-3" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <h3 class="font-semibold text-[#2c2c64]">How can I track my earnings?</h3>
+                    <svg id="faq-icon-3" class="w-6 h-6 text-[#2c2c64] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
@@ -353,8 +351,8 @@
             <!-- FAQ Item 4 (NEW) -->
             <div class="bg-white shadow-lg rounded-lg mb-4">
                 <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-4')">
-                    <h3 class="font-semibold text-[#fc4b3b]">How do I get paid?</h3>
-                    <svg id="faq-icon-4" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <h3 class="font-semibold text-[#2c2c64]">How do I get paid?</h3>
+                    <svg id="faq-icon-4" class="w-6 h-6 text-[#2c2c64] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
@@ -366,8 +364,8 @@
             <!-- FAQ Item 5 (NEW) -->
             <div class="bg-white shadow-lg rounded-lg mb-4">
                 <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-5')">
-                    <h3 class="font-semibold text-[#fc4b3b]">Can I sell multiple products?</h3>
-                    <svg id="faq-icon-5" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <h3 class="font-semibold text-[#2c2c64]">Can I sell multiple products?</h3>
+                    <svg id="faq-icon-5" class="w-6 h-6 text-[#2c2c64] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
@@ -379,8 +377,8 @@
             <!-- FAQ Item 6 (NEW) -->
             <div class="bg-white shadow-lg rounded-lg mb-4">
                 <div class="border-b p-6 flex justify-between items-center cursor-pointer" onclick="toggleFaq('faq-6')">
-                    <h3 class="font-semibold text-[#fc4b3b]">How do I install the software?</h3>
-                    <svg id="faq-icon-6" class="w-6 h-6 text-[#fc4b3b] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <h3 class="font-semibold text-[#2c2c64]">How do I install the software?</h3>
+                    <svg id="faq-icon-6" class="w-6 h-6 text-[#2c2c64] transform transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </div>
@@ -391,48 +389,19 @@
 
         </div>
     </div>
-</section>
+    <script>
+        // Function to toggle FAQ visibility and change icon rotation
+        function toggleFaq(faqId) {
+            const faqContent = document.getElementById(faqId);
+            const faqIcon = document.getElementById(`faq-icon-${faqId.split('-')[1]}`);
 
-<script>
-    // Function to toggle FAQ visibility and change icon rotation
-    function toggleFaq(faqId) {
-        const faqContent = document.getElementById(faqId);
-        const faqIcon = document.getElementById(`faq-icon-${faqId.split('-')[1]}`);
+            // Toggle visibility of FAQ content
+            faqContent.classList.toggle('hidden');
 
-        // Toggle visibility of FAQ content
-        faqContent.classList.toggle('hidden');
-
-        // Rotate icon on click
-        faqIcon.classList.toggle('rotate-180');
-    }
-</script>
-
-<!-- feature top products -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-3xl font-semibold text-[#394b62] mb-6">Featured Products</h2>
-        <p class="text-base text-[#747078] mb-8">Explore our most popular products that you can start reselling right now.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="p-6 bg-gray-100 rounded-lg shadow-md">
-                <img src="{{ asset('assets/img/product1.jpg') }}" alt="Product 1" class="w-full h-[180px] object-cover rounded-md mb-4">
-                <h3 class="font-semibold text-[#fc4b3b]">Product 1</h3>
-                <p class="text-gray-600 mt-2">Description of the product that you can sell and earn from. High demand and great commissions.</p>
-                <a href="#" class="text-[#fc4b3b] mt-4 block">Learn More</a>
-            </div>
-            <div class="p-6 bg-gray-100 rounded-lg shadow-md">
-                <img src="{{ asset('assets/img/product2.jpg') }}" alt="Product 2" class="w-full h-[180px] object-cover rounded-md mb-4">
-                <h3 class="font-semibold text-[#fc4b3b]">Product 2</h3>
-                <p class="text-gray-600 mt-2">Description of the product that you can sell and earn from. High demand and great commissions.</p>
-                <a href="#" class="text-[#fc4b3b] mt-4 block">Learn More</a>
-            </div>
-            <div class="p-6 bg-gray-100 rounded-lg shadow-md">
-                <img src="{{ asset('assets/img/product3.jpg') }}" alt="Product 3" class="w-full h-[180px] object-cover rounded-md mb-4">
-                <h3 class="font-semibold text-[#fc4b3b]">Product 3</h3>
-                <p class="text-gray-600 mt-2">Description of the product that you can sell and earn from. High demand and great commissions.</p>
-                <a href="#" class="text-[#fc4b3b] mt-4 block">Learn More</a>
-            </div>
-        </div>
-    </div>
+            // Rotate icon on click
+            faqIcon.classList.toggle('rotate-180');
+        }
+    </script>
 </section>
 
 <!-- Newletter section -->
@@ -446,8 +415,6 @@
         </form>
     </div>
 </section>
-
-
 
 <!-------------------Modal to show when we click "Security system or home button on the page" ------------->
 <div id="info-modal" class="hidden fixed inset-0 z-50 items-center bg-black bg-opacity-70 justify-center">
