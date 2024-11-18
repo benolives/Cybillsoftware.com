@@ -42,18 +42,21 @@
                 <div class="sidebar-wrapper scrollbar scrollbar-inner">
                     <div class="sidebar-content">
                         <ul class="nav nav-secondary">
-                            <li class="nav-item active dashboard">
-                                <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                            <!-- dashboard section -->
+                            <li class="nav-item active dashboard section-item" data-section="dashboard">
+                                <a data-bs-toggle="collapse" href="javascript:void(0);" class="collapsed" aria-expanded="false">
                                     <i class="fas fa-home"></i>
                                     <p>Dashboard</p>
                                 </a>
                             </li>
+                            <!-- cybill software marker -->
                             <li class="nav-section">
                                 <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                                 </span>
-                                <h4 class="text-section">M-tambo</h4>
+                                <h4 class="text-section">Cybill Software</h4>
                             </li>
+                            <!-- clients section -->
                             <li class="nav-item clients">
                                 <a data-bs-toggle="collapse" href="#base">
                                     <i class="fa-solid fa-users"></i>
@@ -62,19 +65,25 @@
                                 </a>
                                 <div class="collapse" id="base">
                                     <ul class="nav nav-collapse">
-                                        <li>
-                                            <a href="components/kaspersky.html">
+                                        <li class="section-item" data-section="all_clients">
+                                            <a href="javascript:void(0);">
+                                                <span class="sub-item">All clients</span>
+                                            </a>
+                                        </li>
+                                        <li class="section-item" data-section="kaspersky_clients">
+                                            <a href="javascript:void(0);">
                                                 <span class="sub-item">Kaspersky clients</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="components/bitdefender.html">
+                                        <li class="section-item" data-section="bitdefender_clients">
+                                            <a href="javascript:void(0);">
                                                 <span class="sub-item">Bitdefender clients</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
+                            <!-- partners section -->
                             <li class="nav-item partners">
                                 <a data-bs-toggle="collapse" href="#sidebarLayouts">
                                     <i class="fa-regular fa-handshake"></i>
@@ -83,7 +92,7 @@
                                 </a>
                                 <div class="collapse" id="sidebarLayouts">
                                 <ul class="nav nav-collapse">
-                                    <li>
+                                    <li class="section-item" data-section="all_partners">
                                         <a href="partners.html">
                                             <span class="sub-item">All partners</span>
                                         </a>
@@ -91,6 +100,7 @@
                                 </ul>
                                 </div>
                             </li>
+                            <!-- orders section -->
                             <li class="nav-item orders">
                                 <a data-bs-toggle="collapse" href="#forms">
                                     <i class="fa-solid fa-box"></i>
@@ -99,100 +109,110 @@
                                 </a>
                                 <div class="collapse" id="forms">
                                     <ul class="nav nav-collapse">
-                                        <li>
-                                            <a href="forms/forms.html">
+                                        <li class="section-item" data-section="completed_orders">
+                                            <a href="javascript:void(0);">
                                                 <span class="sub-item">Completed</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="forms/forms.html">
+                                        <li class="section-item" data-section="not_completed_orders">
+                                            <a href="javascript:void(0);">
                                                 <span class="sub-item">Not Completed</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
+
+                            <!-- product management marker -->
                             <li class="nav-section product_management_section">
                                 <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                                 </span>
                                 <h4 class="text-section">Products Management</h4>
                             </li>
-                            <li class="nav-item Categories">
-                                <a data-bs-toggle="collapse" href="#tables">
+                            <!-- categories section -->
+                            <li class="nav-item Categories section-item" data-section="categories">
+                                <a data-bs-toggle="collapse" href="javascript:void(0);">
                                     <i class="fa-solid fa-layer-group"></i>
                                     <p>Categories</p>
                                 </a>
                             </li>
+                            <!-- products section -->
                             <li class="nav-item products">
-                                <a data-bs-toggle="collapse" href="#charts">
+                                <a data-bs-toggle="collapse" href="javascript:void(0);">
                                     <i class="fa-solid fa-shield-halved"></i>
                                     <p>Products</p>
                                     <span class="caret"></span>
                                 </a>
                                 <div class="collapse" id="charts">
                                 <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="charts/charts.html">
+                                    <li class="section-item" data-section="kaspersky_products">
+                                        <a href="javascript:void(0);">
                                             <span class="sub-item">Kaspersky</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="charts/sparkline.html">
+                                    <li class="section-item" data-section="bitdefender_products">
+                                        <a href="javascript:void(0);">
                                             <span class="sub-item">Bitdefender</span>
                                         </a>
                                     </li>
                                 </ul>
                                 </div>
                             </li>
+
+                            <!-- product keys section -->
                             <li class="nav-item product_keys">
-                                <a data-bs-toggle="collapse" href="#maps">
+                                <a data-bs-toggle="collapse" href="javascript:void(0);">
                                     <i class="fa-solid fa-key"></i>
                                     <p>Product keys</p>
                                     <span class="caret"></span>
                                 </a>
                                 <div class="collapse" id="maps">
                                     <ul class="nav nav-collapse">
-                                        <li>
-                                            <a href="maps/googlemaps.html">
+                                        <li class="section-item" data-section="kaspersky_keys">
+                                            <a href="javascript:void(0);">
                                                 <span class="sub-item">Kaspersky keys</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="maps/jsvectormap.html">
+                                        <li class="section-item" data-section="bitdefender_keys">
+                                            <a href="javascript:void(0);">
                                                 <span class="sub-item">Bitdefender Keys</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
+
+                            <!-- Transactions marker -->
                             <li class="nav-section transactions_section">
                                 <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                                 </span>
                                 <h4 class="text-section">Transactions</h4>
                             </li>
-                            <li class="nav-item transaction_history">
-                                <a data-bs-toggle="collapse" href="#maps">
+                            <!-- transaction history section -->
+                            <li class="nav-item transaction_history section-item" data-section="transaction_history">
+                                <a data-bs-toggle="collapse" href="javascript:void(0);">
                                     <i class="fa-solid fa-money-check"></i>
                                     <p>Transaction history</p>
                                 </a>
                             </li>
+                            <!-- sales section -->
                             <li class="nav-item sales">
-                                <a data-bs-toggle="collapse" href="#maps">
+                                <a data-bs-toggle="collapse" href="javascript:void(0);">
                                     <i class="fa-solid fa-money-check"></i>
                                     <p>Sales</p>
                                     <span class="caret"></span>
                                 </a>
                                 <div class="collapse" id="maps">
                                     <ul class="nav nav-collapse">
-                                        <li>
-                                            <a href="maps/googlemaps.html">
+                                        <li class="section-item" data-section="kaspersky_sales">
+                                            <a href="javascript:void(0);">
                                                 <span class="sub-item">Kaspersky sales</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="maps/jsvectormap.html">
+                                        <li class="section-item" data-section="bitdefender_sales">
+                                            <a href="javascript:void(0);">
                                                 <span class="sub-item">Bitdefender sales</span>
                                             </a>
                                         </li>
@@ -207,6 +227,7 @@
 
             <!-- Main panel section starts here -->
             <div class="main-panel">
+                <!-- the header part -->
                 <div class="main-header">
                     <div class="main-header-logo">
                         <!-- Logo Header -->
@@ -306,32 +327,9 @@
                     </nav>
                     <!-- End Navbar -->
                 </div>
-                <div class="container">
-                    <div class="page-inner">
-                        <div class="page-header">
-                        <h4 class="page-title">Dashboard</h4>
-                        <ul class="breadcrumbs">
-                            <li class="nav-home">
-                            <a href="#">
-                                <i class="icon-home"></i>
-                            </a>
-                            </li>
-                            <li class="separator">
-                            <i class="icon-arrow-right"></i>
-                            </li>
-                            <li class="nav-item">
-                            <a href="#">Pages</a>
-                            </li>
-                            <li class="separator">
-                            <i class="icon-arrow-right"></i>
-                            </li>
-                            <li class="nav-item">
-                            <a href="#">Starter Page</a>
-                            </li>
-                        </ul>
-                        </div>
-                        <div class="page-category">Inner page content goes here</div>
-                    </div>
+                <!-- content part -->
+                <div class="container" id="main-panel-content-section">
+                    @yield('content');
                 </div>
 
                 <!-- Footer section starts here -->
@@ -362,20 +360,7 @@
         <!-- jQuery Scrollbar -->
         <script src="{{ asset('assets/js/dashboard_js/jquery.scrollbar.min.js') }}"></script>
 
-        <!-- Chart JS -->
-        <script src="assets/js/plugin/chart.js/chart.min.js"></script>
-
-        <!-- jQuery Sparkline -->
-        <script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
-
-        <!-- Chart Circle -->
-        <script src="assets/js/plugin/chart-circle/circles.min.js"></script>
-
-        <!-- Datatables -->
-        <script src="assets/js/plugin/datatables/datatables.min.js"></script>
-
-
-        <!-- Google Maps Plugin -->
-        <script src="assets/js/plugin/gmaps/gmaps.js"></script>
+        <!-- personal dashboard javascript file for styling -->
+        <script src="{{ asset('assets/js/dashboard_js/dashboard.js') }}"></script>
     </body>
 </html>

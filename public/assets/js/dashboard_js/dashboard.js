@@ -107,46 +107,51 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Select all sidebar links
-    const sidebarLinks = document.querySelectorAll('.sidebar .menu li a');
-    
-    // Add click event listener to each sidebar link
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            // Prevent the default link behavior (no page reload)
-            e.preventDefault();
+/*====================================================================================
+    Handle the sidebar item click events and send the AJAX request to fetch the 
+    content dynamically depending on the sidebar item we have clicked
+======================================================================================*/
+document.addEventListener('DOMContentLoaded', function() {
+    //get all the sidebar items that when clicked should show some data
+    // I have given them similar class 'section-item' so that they can be
+    // selected together
+    const sidebarItems = document.querySelectorAll('.section-item');
 
-            // Get the URL of the clicked link
-            const url = this.getAttribute('href');
-            console.log(url)
+    //loop through each sidebar item and add an event listener
+    sidebarItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // get the specific section we are displaying from the data-section attribute
+            const section = item.getAttribute('data-section');
 
-            // Call the function to load the content dynamically
-            loadContent(url);
+            //Now call a function to load the specific content of the section
+            loadSectionContent(section);
+        })
+    })
+
+    //function to load the content of the section dynamically via Ajax
+    //and inject it into main panel
+    function loadSectionContent(section) {
+        // Target the main panel to update content
+        const mainPanelContentSection = document.getElementById('main-panel-content-section');
+        
+        // Show loading spinner or message for now lets do a div
+        mainPanelContentSection.innerHTML = '<div class="loading">Loading...</div>';
+
+        // Make the AJAX request to the server to fetch the content for the selected section
+        fetch(`/admin/dashboard/load-section?section=${section}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to load section');
+            }
+            return response.text(); // Return the HTML content
+        })
+        .then(content => {
+            mainPanelContentSection.innerHTML = content; // Update the main panel with the fetched content
+        })
+        .catch(error => {
+            mainPanelContentSection.innerHTML = '<div class="error">Error loading content</div>';
+            console.error(error);
         });
-    });
-
-    // Function to load content dynamically into the main content area
-    function loadContent(url) {
-        const contentArea = document.getElementById('content-area');
-        contentArea.innerHTML = 'Loading...'; // Optional: Show loading text or a spinner
-
-        // Create a new AJAX request using the Fetch API
-        fetch(url)
-            .then(response => {
-                if (response.ok) {
-                    return response.text(); // Return the response text (HTML content)
-                }
-                throw new Error('Network response was not ok');
-            })
-            .then(data => {
-                // Inject the content into the #content-area div
-                contentArea.innerHTML = data;
-            })
-            .catch(error => {
-                // If there's an error, display a fallback message
-                contentArea.innerHTML = 'Error loading content. Please try again.';
-                console.error('There was an error with the fetch operation:', error);
-            });
     }
-});
+
+})

@@ -76,6 +76,12 @@ class LoginController extends Controller
             return redirect('/login')->with('warning', 'You need to verify your email address before logging in.');
         }
 
+        // Redirect user based on their admin status if they are admin redirect them to dashbaord
+        if ($user->is_admin) {
+            // Redirect to the admin dashboard if the user is an admin
+            return redirect('/admin/dashboard')->with('toast', 'Welcome back, Admin!');
+        }
+
         // Redirect to the products page with a message for toast
         return redirect($this->redirectTo)->with('toast', 'Welcome back! Please choose the products you want to sell.');
     }
