@@ -730,6 +730,10 @@ input[type="search"] {
   order: 2;
 }
 
+.col-auto {
+  grid-column: auto;
+}
+
 .float-right {
   float: right;
 }
@@ -894,6 +898,14 @@ input[type="search"] {
 
 .mt-\[20px\] {
   margin-top: 20px;
+}
+
+.me-2 {
+  margin-inline-end: 0.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 .line-clamp-2 {
@@ -1927,6 +1939,10 @@ input[type="search"] {
 
 .pt-24 {
   padding-top: 6rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
 }
 
 .text-left {

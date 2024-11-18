@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/dashboard_css/bootstrap.min.css')}}" />
         <link rel="stylesheet" href="{{ asset('assets/css/dashboard_css/plugins.min.css')}}" />
         <link rel="stylesheet" href="{{ asset('assets/css/dashboard_css/kaiadmin.min.css')}}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/app-CmYmiJCz.css')}}">
     </head>
     <body>
         <div class="wrapper">
@@ -329,7 +330,21 @@
                 </div>
                 <!-- content part -->
                 <div class="container" id="main-panel-content-section">
-                    @yield('content');
+                    <div class="page-inner">
+                        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                            <div>
+                                <h3 class="fw-bold mb-3">Admin Dashboard</h3>
+                                <h6 class="op-7 mb-2 font-semibold">Welcome {{ Auth::user()->name }}</h6>
+                            </div>
+                            <div class="ms-md-auto py-2 py-md-0">
+                                <form action="{{ route('logout') }}" method="POST" class="inline">
+                                    @csrf
+                                    <button type="submit" class="btn bg-[#fc4b3b] btn-round me-2 text-white">Logout</button>
+                                </form>
+                                <a href="javascript:void(0);" class="btn btn-primary btn-round section-item" data-section="new_partner_form">Add New Partner</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Footer section starts here -->

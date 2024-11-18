@@ -35,6 +35,8 @@ class AdminController extends Controller
                 return view('admin.sections.users');
             case 'features':
                 return view('admin.sections.features');
+            case 'new_partner_form':
+                return view('admin.sections.new_partner_form');
             default:
                 return response()->json(['error' => 'Invalid section requested.'], 400);
         }
