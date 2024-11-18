@@ -139,6 +139,12 @@
                      class="nav-link text-gray-700 p-2 rounded {{ Request::is('my-account') ? 'bg-[#fc4b3b]' : '' }} transition duration-300">
                      My Page
                   </a>
+                  <!-- Check if the user is an administrator -->
+                  @if(auth()->user()->is_admin)
+                     <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200">
+                        Admin Dashboard
+                     </a>
+                  @endif 
                   <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="p-2 text-gray-700 hover:text-[#fc4b3b]">Logout</button>
