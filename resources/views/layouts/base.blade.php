@@ -76,7 +76,12 @@
                            </div>
                            <div id="user-account-dropdown" class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg hidden transition-opacity duration-200 ease-in-out">
                               <div class="py-2">
-                                    <a href="/my-account" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200">My Page</a>
+                                    <!-- Check if the user is an administrator -->
+                                    @if(auth()->user()->is_admin)
+                                       <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200">
+                                          Admin Dashboard
+                                       </a>
+                                    @endif                         
                                     <form action="{{ route('logout') }}" method="POST" class="inline">
                                        @csrf
                                        <button type="submit" class="w-full text-start px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200">

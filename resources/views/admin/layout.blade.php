@@ -52,7 +52,7 @@
                                 <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                                 </span>
-                                <h4 class="text-section">CYBILL SOFTWARE</h4>
+                                <h4 class="text-section">M-tambo</h4>
                             </li>
                             <li class="nav-item clients">
                                 <a data-bs-toggle="collapse" href="#base">

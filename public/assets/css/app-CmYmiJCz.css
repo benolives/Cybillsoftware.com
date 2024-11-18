@@ -896,10 +896,6 @@ input[type="search"] {
   margin-top: 20px;
 }
 
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
 .line-clamp-2 {
   overflow: hidden;
   display: -webkit-box;
@@ -1917,6 +1913,10 @@ input[type="search"] {
   padding-bottom: 10px;
 }
 
+.pe-1 {
+  padding-inline-end: 0.25rem;
+}
+
 .pl-6 {
   padding-left: 1.5rem;
 }
@@ -1927,10 +1927,6 @@ input[type="search"] {
 
 .pt-24 {
   padding-top: 6rem;
-}
-
-.pe-1 {
-  padding-inline-end: 0.25rem;
 }
 
 .text-left {
