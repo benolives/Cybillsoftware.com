@@ -33,6 +33,10 @@ class ProductsController extends Controller
         //fetch products from database for now or return 404 error
         $products = Product::all();
 
+        // Log the retrieved products for debugging purposes
+        Log::info('Retrieved products:', ['products' => $products]);
+
+
         /*
             compact('products'): This function creates an associative array containing variables 
             that are passed to the view. In this case, it takes the variable $products 
@@ -108,14 +112,34 @@ class ProductsController extends Controller
     //retrieve the bitdefender products only
     public function showBitdefenderProducts()
     {
-        //first retrive the category using a slug we have given it. it is unique
-        $category = Category::where('slug', 'bitdefender')->firstOrFail();
-        $products = Product::where('category_id', $category->id)->get();
-
-        Log::info('Fetched products for category: bitdefender', [
-            'products' => $products
-        ]);
-        return view('products.index', compact('products'));
+        try {
+            // Retrieve the bitdefender category based on its slug
+            $category = Category::where('slug', 'bitdefender')->firstOrFail();
+        
+            // Retrieve the products related to the bitdefender category
+            $bitdefenderProducts = Product::where('category_id', $category->id)->get();
+        
+            if ($bitdefenderProducts->isEmpty()) {
+                // Log an error if no products are found and show a user-friendly message
+                Log::error('No Kaspersky products found in the database');
+                return view('errors.custom_error', ['errorMessage' => 'No Bitdefender products available at this time.']);
+            }
+        
+            // Log the products for debugging purposes (optional, sensitive data should be sanitized if necessary)
+            Log::info('Fetched  Bitdefender products from the database', ['products_count' => $bitdefenderProducts->count()]);
+        
+            // Return the view with the products
+            return view('products.bitdefender', compact('bitdefenderProducts'));
+        
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            // Handle the case where the category is not found
+            Log::error('Bitdefender category not found: ' . $e->getMessage());
+            return view('errors.custom_error', ['errorMessage' => 'Bitdefender category not found.']);
+        } catch (\Exception $e) {
+            // Catch any other exceptions and log them
+            Log::error('Error fetching Bitdefender products from the database: ' . $e->getMessage());
+            return view('errors.custom_error', ['errorMessage' => 'An error occurred while fetching Bitdefender products.']);
+        }
     }
 
     public function showSpecificProduct($id)

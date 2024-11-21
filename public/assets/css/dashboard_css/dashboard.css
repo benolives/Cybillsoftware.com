@@ -1,0 +1,87 @@
+/*==========================================================================================
+        This is the sidebar section of the Admin dashboard styling .Together with the
+        bootstrap styles we are adding our own small styles to customise the application
+===========================================================================================*/
+.collapse {
+    display: none;
+}
+
+/*==========================================================================================
+        Skeleton Loader To display some contents before displaying the sidebar section
+===========================================================================================*/
+/* Skeleton Loader styles */
+.skeleton-loader {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.skeleton-item {
+    height: 200px;
+    width: 100%;
+    background: #e0e0e0;
+    border-radius: 4px;
+    animation: skeleton 1.5s infinite ease-in-out;
+}
+
+.skeleton-item:nth-child(odd) {
+    width: 100%;
+}
+
+@keyframes skeleton {
+    0% { background-color: #e0e0e0; }
+    50% { background-color: #f2f2f2; }
+    100% { background-color: #e0e0e0; }
+}
+
+/*==========================================================================================
+        Here we are applying some stylings to the BenOlives payments main panel
+===========================================================================================*/
+.benolives_payment_section .card {
+    margin-bottom: 10px;
+}
+
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination-container .page-item {
+        margin: 0 5px;
+        border-radius: 5px;
+    }
+
+    .pagination-container .page-item .page-link {
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 14px;
+        color: #007bff;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        transition: background-color 0.2s ease;
+    }
+
+    .pagination-container .page-item .page-link:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .pagination-container .page-item.active .page-link {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .pagination-container .page-item .page-link:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .pagination-container .page-item.disabled .page-link {
+        background-color: #e9ecef;
+        color: #6c757d;
+        pointer-events: none;
+    }

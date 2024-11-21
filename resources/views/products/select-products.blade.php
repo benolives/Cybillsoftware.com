@@ -25,7 +25,8 @@
         </div>
 
         <!-- Bitdefender Card -->
-        <div class="bg-white shadow-lg rounded-lg p-6 w-72 transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:cursor-pointer">
+        <div class="bg-white shadow-lg rounded-lg p-6 w-72 transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:cursor-pointer"
+            onclick="window.location.href='{{ route('products.bitdefender') }}'">
             <div class="text-center">
                 <img src="{{ asset('assets/img/bitdefender_logo.jpg') }}"
                     alt="Bitdefender Logo" class="h-24 mx-auto mb-4">
@@ -36,7 +37,7 @@
 
         <!-- All Products Card -->
         <div class="bg-white shadow-lg rounded-lg p-6 w-72 transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:cursor-pointer"
-            onclick="showProducts('all')">
+            onclick="window.location.href='{{ route('products.index') }}'">
             <div class="text-center">
                 <img src=""
                     alt="All Products Logo" class="h-24 mx-auto mb-4">

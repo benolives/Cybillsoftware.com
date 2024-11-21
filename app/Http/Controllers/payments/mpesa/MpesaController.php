@@ -218,7 +218,7 @@ class MpesaController extends Controller
                     $client->save();
 
                     // Send the purchase confirmation email
-                    // $this->sendPurchaseEmail($fullname, $email, $productId, $response->json());
+                    $this->sendPurchaseEmail($fullname, $email, $productId, $response->json());
 
                     Log::info('Order created with ID: ' . $order->id . ' and CheckoutRequestID: ' . $CheckoutRequestID);
                     

@@ -27,6 +27,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\BlogController;
 
+use App\Exports\KasperskyLicensesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -172,6 +175,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     
     //route to load a specific section of the dashboard
     Route::get('/dashboard/load-section', [AdminController::class, 'loadSectionContent'])->name('admin.loadSection');
+    Route::get('/export-kaspersky-licenses', function() {
+        return Excel::download(new KasperskyLicensesExport, 'kaspersky_licenses.xlsx');
+    })->name('export.kaspersky_partners');;
 });
 
 /*========================================================================================\

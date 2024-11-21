@@ -16,7 +16,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.3",
-        "maatwebsite/excel": "^3.1.52",
+        "maatwebsite/excel": "^3.1",
         "psr/simple-cache": "2.0"
     },
     "require-dev": {

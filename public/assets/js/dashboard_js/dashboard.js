@@ -108,6 +108,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /*====================================================================================
+    This is my vanilla js that will handle the collapsing and expansion of of collapsible
+    toggles on the sidebar of the admin dashboard
+======================================================================================*/
+document.addEventListener("DOMContentLoaded", function() {
+    // Get all elements with the class "collapse-toggle"
+    const collapseToggles = document.querySelectorAll('.collapse-toggle');
+
+    // Loop through each toggle and add a click event listener
+    collapseToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            // Get the next sibling element (the .collapse-content div)
+            const content = this.nextElementSibling;
+
+            // Toggle the 'collapse' class on the content element
+            content.classList.toggle('collapse');
+
+            // Optional: Toggle the 'aria-expanded' attribute for accessibility
+            const isExpanded = content.classList.contains('collapse');
+            this.setAttribute('aria-expanded', !isExpanded);
+        });
+    });
+});
+
+
+/*====================================================================================
     Handle the sidebar item click events and send the AJAX request to fetch the 
     content dynamically depending on the sidebar item we have clicked
 ======================================================================================*/
@@ -134,9 +159,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Target the main panel to update content
         const mainPanelContentSection = document.getElementById('main-panel-content-section');
         
-        // Show loading spinner or message for now lets do a div
-        mainPanelContentSection.innerHTML = '<div class="loading">Loading...</div>';
-
+        // Show a skeleton screen (a placeholder) as a loader before displaying the contents
+        mainPanelContentSection.innerHTML = `
+            <div class="page-inner">
+                <div class="skeleton-loader">
+                    <div class="skeleton-item"></div>
+                    <div class="skeleton-item"></div>
+                    <div class="skeleton-item"></div>
+                </div>
+            <div>
+        `;
         // Make the AJAX request to the server to fetch the content for the selected section
         fetch(`/admin/dashboard/load-section?section=${section}`)
         .then(response => {
@@ -154,4 +186,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-})
+});
+
+
+/*====================================================================================
+    This section will enable searching for the tables in the Benolives payments
+    sections. on searching the partners
+======================================================================================*/
+// Wait for the DOM to fully load
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Use event delegation to listen for input changes on the search bar
+    document.body.addEventListener('input', function(event) {
+        // Check if the input is the search input for partner-sales
+        if (event.target && event.target.id === 'search-partner-sales') {
+            const searchText = event.target.value.toLowerCase();
+            // Select all rows in the table
+            const rows = document.querySelectorAll('#partner-sales-table tbody tr');
+
+            // Loop through each row in the table
+            rows.forEach(function(row) {
+                const rowText = row.textContent.toLowerCase();
+                
+                // If the row text contains the search text, show it, otherwise hide it
+                if (rowText.indexOf(searchText) > -1) {
+                    row.style.display = '';  // Show row
+                } else {
+                    row.style.display = 'none';  // Hide row
+                }
+            });
+        }
+    });
+});

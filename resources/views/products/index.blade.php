@@ -102,64 +102,75 @@
             All Products
         </a>
         <a href="{{ route('products.bitdefender') }}" 
-            class="{{ request()->is('products/bitdefender') ? 'bg-[#fc4b3b] text-white' : 'bg-gray-400 text-gray-800' }} rounded-r-md py-2 px-4"
+            class="{{ request()->is('products/bitdefender') ? 'bg-[#fc4b3b] text-white' : 'bg-gray-400 text-gray-800' }} py-2 px-4"
         >
             Bitdefender Products
+        </a>
+        <a href="{{ route('products.kaspersky') }}" 
+            class="{{ request()->is('products/kaspersky') ? 'bg-[#fc4b3b] text-white' : 'bg-gray-400 text-gray-800' }} py-2 px-4 rounded-r-md"
+        >
+            Kaspersky Products
         </a>
     </div>
 
     <!-- Product Grid -->
     <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
         @foreach ($products as $product)
-            @if ($product->category_id == 2) <!-- Only display Bitdefender products -->
-                <div class="bg-[#f0f0f0] p-6 rounded-lg shadow-lg">
-                    <!-- Product Header -->
-                    <div class="bg-[#2c2c64] text-white text-center py-2 rounded-t-lg">
-                        {{ $product->product_plan_name }}
+            <div class="bg-[#f0f0f0] p-6 rounded-lg shadow-lg">
+                <!-- Product Header -->
+                <div class="bg-[#2c2c64] text-white text-center py-2 rounded-t-lg">
+                    {{ $product->product_plan_name }}
+                </div>
+                <!-- Product Details -->
+                <div class="flex items-center space-x-4 py-4">
+                    <img 
+                        src="{{ asset($product->category_id == 2 ? 'assets/img/bitdefender.png' : 'assets/img/kaspersky_logo.png') }}" 
+                        alt="{{ $product->product_name }}" 
+                        class="h-12 w-auto"
+                    />
+                    <div>
+                        <h3 class="text-lg font-semibold">{{ $product->product_name }}</h3>
+                        <p class="text-sm text-gray-600">{{ $product->description }}</p>
                     </div>
-                    <!-- Product Details -->
-                    <div class="flex items-center space-x-4 py-4">
-                        <img 
-                            src="{{ asset('assets/img/bitdefender.png') }}" 
-                            alt="{{ $product->product_name }}" 
-                            class="h-12 w-auto"
-                        />
-                        <div>
-                            <h3 class="text-lg font-semibold">{{ $product->product_name }}</h3>
-                            <p class="text-sm text-gray-600">{{ $product->description }}</p>
-                        </div>
+                </div>
+
+                <!-- Product Reviews -->
+                @if ($product->reviews > 0)
+                    <div class="flex items-center mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                        <span class="ml-2 text-sm text-gray-600">({{ $product->reviews }} reviews)</span>
                     </div>
-                    <!-- Product Reviews -->
-                    @if ($product->reviews > 0)
-                        <div class="flex items-center mb-4">
-                            <span class="text-yellow-400">★★★★★</span>
-                            <span class="ml-2 text-sm text-gray-600">({{ $product->reviews }} reviews)</span>
-                        </div>
-                    @endif
-                    <!-- Product Price -->
-                    <div class="text-center text-xl font-semibold mb-2">
-                        <span class="line-through text-red-500 text-lg italic">KSH {{ number_format($product->price) }}/year</span><br>
-                        <span>KSH {{ number_format($product->price_offer) }}/year</span>
+                @endif
+                <!-- Product Price -->
+                <div class="text-center text-xl font-semibold mb-2">
+                    <span class="line-through text-red-500 text-lg italic">KSH {{ number_format($product->price) }}/year</span><br>
+                    <span>KSH {{ number_format($product->price_offer) }}/year</span>
+                </div>
+                <!-- Discount -->
+                @if ($product->discount_percentage > 0)
+                    <div class="text-center mb-4">
+                        <span class="inline-block px-3 py-1 text-sm font-semibold text-white rounded-full" 
+                            style="background: linear-gradient(to right, #fc4b3b, #2c2c64);">
+                            Save {{ $product->discount_percentage }}%
+                        </span>
                     </div>
-                    <!-- Discount -->
-                    @if ($product->discount_percentage > 0)
-                        <div class="text-center mb-4">
-                            <span class="inline-block px-3 py-1 text-sm font-semibold text-white rounded-full" 
-                                style="background: linear-gradient(to right, #fc4b3b, #2c2c64);">
-                                Save {{ $product->discount_percentage }}%
-                            </span>
-                        </div>
-                    @endif
-                    <!-- Compatibility -->
+                @endif
+                <!-- Compatibility -->
+                @if (!empty($product->compatibility) && count(json_decode($product->compatibility)) > 0)
                     <div class="flex justify-center space-x-2 mb-4">
                         @foreach (json_decode($product->compatibility) as $os)
                             <div class="flex flex-row items-center justify-between">
                                 <span class="text-sm">{{ $os }}</span>
                             </div>
-                            <div>|</div>
+                            @if (!$loop->last)
+                                <div>|</div>
+                            @endif
                         @endforeach
                     </div>
-                    <!-- Product Benefits -->
+                @endif
+
+                <!-- Product Benefits -->
+                @if (!empty($product->benefits) && count(json_decode($product->benefits)) > 0)
                     <ul class="list-none pl-6 mb-6 space-y-2">
                         @foreach (json_decode($product->benefits) as $benefit)
                             <li class="flex items-center gap-2">
@@ -171,12 +182,13 @@
                             </li>
                         @endforeach
                     </ul>
-                    <!-- Learn More Button -->
-                    <a href="{{ route('product.details', ['id' => $product->id]) }}" class="block bg-[#fc4b3b] text-white text-center py-2 rounded-md hover:bg-[#fc4b3b]/90">
-                        Learn More
-                    </a>
-                </div>
-            @endif
+                @endif
+
+                <!-- Learn More Button -->
+                <a href="{{ route('product.details', ['id' => $product->id]) }}" class="block bg-[#fc4b3b] text-white text-center py-2 rounded-md hover:bg-[#fc4b3b]/90">
+                    Learn More
+                </a>
+            </div>
         @endforeach
     </div>
 
