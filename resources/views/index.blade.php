@@ -103,7 +103,7 @@
                 @endif
             </div>           
         </div>
-        <div class="learnMoreAboutUsContainer absolute left-8 bottom-6">
+        <div class="learnMoreAboutUsContainer hidden md:block absolute right-8 bottom-6">
                 <a href="{{ route('about-us') }}" class="flex items-center gap-2 text-sm text-white">
                     <span>Learn more about Us</span>
                     <span class="flex items-center justify-center">
@@ -113,18 +113,20 @@
                     </span>
                 </a>
         </div>
-        <!-- <div id="showHomeModal" class="relative w-[265px] flex items-center gap-x-4 p-4 text-md uppercase leading-6 text-white cursor-pointer">
-            <svg class="absolute top-0 left-0 w-full h-full fill-transparent">
-                <rect width="100%" height="100%" rx="10" ry="10"></rect>
-            </svg>
-            <span class="font-semibold">System Security</span>
-            <span class="flex items-center">
-                Home
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right ml-2" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+        <div class="absolute left-8 bottom-6">
+            <div id="showHomeModal" class="flex items-center gap-x-4 p-2 text-sm uppercase leading-6 text-white cursor-pointer">
+                <svg class="absolute top-0 left-0 w-full h-full fill-transparent">
+                    <rect width="100%" height="100%" rx="10" ry="10"></rect>
                 </svg>
-            </span>
-        </div> -->
+                <span class="font-semibold">System Security</span>
+                <span class="flex items-center">
+                    Home
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right ml-2" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </span>
+            </div>
+        </div>
     </div>
 </section>
 <!--======================= Why Cybill Software Section ===================================-->

@@ -3,15 +3,13 @@
 namespace App\Models;
 
 
-use Carbon\Carbon; // For handling date and time
-use Illuminate\Support\Facades\Log; // For logging events
-use Illuminate\Contracts\Auth\MustVerifyEmail; // Interface for email verification
-use Illuminate\Database\Eloquent\Factories\HasFactory; // For factory-based model creation
-use Illuminate\Foundation\Auth\User as Authenticatable; // Base class for the User model
-use Illuminate\Notifications\Notifiable; // Trait for sending notifications
-use Laravel\Sanctum\HasApiTokens; // For API token management
-use Filament\Models\Contracts\FilamentUser; // For Filament user interface
-use Filament\Panel; // For Filament panel management
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 
 class User extends Authenticatable implements MustVerifyEmail

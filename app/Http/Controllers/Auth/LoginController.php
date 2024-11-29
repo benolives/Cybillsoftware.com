@@ -17,25 +17,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-        AuthenticatesUsers trait provides several functions to help us
-        manage authentication such as
-        1. showLoginForm: Displays the login form.
-        2. login: Handles the login request.
-        3. logout: Handles the logout request.
-    */
-
     use AuthenticatesUsers;
 
-    // Set redirect to products page after the user has successfully
-    // logged into the application
     protected $redirectTo = '/select-products';
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        //
     }
 
+    //override the default attemptLogin function from AuthenticatesUsers
     protected function attemptLogin(Request $request)
     {
         $credentials = $this->credentials($request);
@@ -50,14 +41,16 @@ class LoginController extends Controller
         return false;
     }
 
-
+    //This method handles the response when a login attempt fails.
     protected function sendFailedLoginResponse(Request $request)
     {
         $user = \App\Models\User::where('email', $request->email)->first();
 
         if ($user && !$user->hasVerifiedEmail()) {
-            throw ValidationException::withMessages([
-                $this->username() => [trans('auth.verification_needed')],
+            // Redirect back with a message to show the user needs to verify their email
+            return redirect()->route('login')->with([
+                'verification_needed' => 'You need to verify your email address before logging in. Please check your inbox or spam folder.',
+                'email_for_verification' => $user->email
             ]);
         }
 
@@ -66,9 +59,7 @@ class LoginController extends Controller
         ]);
     }
 
-    //when a user successfully logs in this method is invoked
-    //it enusers that the user's email is verified
-    //and then redirects user to where redirectTo is specified
+    //This method is called after the user successfully logs in
     protected function authenticated(Request $request, $user)
     {
         if (!$user->hasVerifiedEmail()) {

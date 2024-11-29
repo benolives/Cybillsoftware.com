@@ -208,7 +208,7 @@
                   Send Us an email
                   <div class="w-full h-[2px] bg-white rounded-[3px] absolute top-[25px] left-0"></div>
                </h3>
-               <form action="{{ route('makeEnquiry') }}" method="POST" class="pb-[10px] flex items-center justify-between text-gray-900 border-b border-b-gray-300 mb-[50px]">
+               <form action="#" method="POST" class="pb-[10px] flex items-center justify-between text-gray-900 border-b border-b-gray-300 mb-[50px]">
                   @csrf
                   <div class="mr-2 text-white">
                      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">

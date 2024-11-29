@@ -24,6 +24,21 @@
             <h2 class="text-3xl font-bold text-[#2c2c64]">Sign In</h2>
         </div>
 
+        <!-- Display error message if the email is unverified -->
+        @if (session('verification_needed'))
+            <div class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-lg mb-4">
+                <strong class="font-semibold">Warning!</strong> 
+                {{ session('verification_needed') }}
+                <br>
+                <form action="{{ route('verification.resend') }}" method="POST" class="inline-block">
+                    @csrf
+                    <!-- Hidden email field passed from session -->
+                    <input type="hidden" name="email" value="{{ session('email_for_verification') }}">
+                    <button type="submit" class="text-[#fc4b3b] font-semibold">Resend verification email</button>
+                </form>
+            </div>
+        @endif
+
         <!-- Login Form -->
         <form action="{{ route('login') }}" method="post" class="space-y-4">
             @csrf

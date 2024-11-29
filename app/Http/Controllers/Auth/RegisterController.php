@@ -45,21 +45,19 @@ class RegisterController extends Controller
                 'ip' => $request->ip(),
                 'errors' => $e->errors(),
             ]);
-            return response()->json(['message' => 'YOOO Validation failed', 'errors' => $e->errors()], 422);
+            // Redirect back with validation errors and a toast query parameter indicating failure
+            return redirect()->route('register')->withErrors($e->errors())->with('toast', 'error');
         }
 
         // Create the user also from RegistersUsers trait
         $user = $this->create($request->all());
-
-        // Log the user in to establish a session for them 
-        Auth::login($user);
 
         // Send the email verification notification this method is
         // defined in the user model
         $user->sendEmailVerificationNotification();
 
         // Redirect to the verification notice page and pass the user email
-        return redirect()->route('verification.notice', ['email' => $request->user()->email]);
+        return redirect()->route('verification.notice', ['email' => $user->email]);
     }
 
     /**

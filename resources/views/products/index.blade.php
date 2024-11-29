@@ -143,8 +143,12 @@
                 @endif
                 <!-- Product Price -->
                 <div class="text-center text-xl font-semibold mb-2">
-                    <span class="line-through text-red-500 text-lg italic">KSH {{ number_format($product->price) }}/year</span><br>
-                    <span>KSH {{ number_format($product->price_offer) }}/year</span>
+                    @if ($product->category_id == 2)
+                        <span>Kes {{ number_format($product->price_partner) }}/year</span>
+                    @endif
+                    @if ($product->category_id == 1)
+                        <span>Kes {{ number_format($product->price_partner) }}/month</span>
+                    @endif
                 </div>
                 <!-- Discount -->
                 @if ($product->discount_percentage > 0)
@@ -186,7 +190,7 @@
 
                 <!-- Learn More Button -->
                 <a href="{{ route('product.details', ['id' => $product->id]) }}" class="block bg-[#fc4b3b] text-white text-center py-2 rounded-md hover:bg-[#fc4b3b]/90">
-                    Learn More
+                    Buy product
                 </a>
             </div>
         @endforeach

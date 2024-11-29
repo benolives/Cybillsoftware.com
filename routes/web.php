@@ -19,7 +19,6 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -97,15 +96,6 @@ Route::get('/contact-us', [AppController::class, 'show_Contact_us'])->name('cont
                                 The Authentication Routes... 
 \*========================================================================================*/
 
-Auth::routes(['verify' => true]);
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware(['signed'])->name('verification.verify');
-    Route::post('/email/verification-notification', [VerificationController::class, 'resendVerificationEmail'])->middleware('throttle:6,1')->name('verification.send');
-});
-
-
 Route::get('register', function () {
     //check if the user is logged in
     if (Auth::check()) {
@@ -117,6 +107,10 @@ Route::get('register', function () {
     return view('auth.register');
 })->name('register');
 Route::post('register', [RegisterController::class, 'register']);
+
+Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware(['signed'])->name('verification.verify');
+Route::post('/email/resend-verification', [VerificationController::class, 'resendVerificationEmail'])->middleware('throttle:6,1')->name('verification.resend');
 
 Route::get('/login', function () {
     //check if the user is logged in
@@ -172,7 +166,23 @@ Route::middleware(['auth', 'verified'])->group(function() {
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Default route for loading the admin dashboard
     Route::get('/dashboard', [AdminController::class, 'loadDashboard'])->name('admin.dashboard');
+
+    Route::get('/add-partner', [AdminController::class, 'show_partner_form'])->name('admin.add_partner');
+
+    //Route to retrieve all the clients
+    Route::get('/all-clients', [AdminController::class, 'allClients'])->name('admin.all_clients');
+    //Route to kaspersky clients
+    Route::get('/kaspersky-clients', [AdminController::class, 'kasperskyClients'])->name('admin.kaspersky_clients');
     
+    //Route to all partners
+    Route::get('/all-partners', [AdminController::class, 'getAllPartners'])->name('admin.all_partners');
+
+    //completed orders
+    Route::get('/completed-orders', [AdminController::class, 'getCompletedOrders'])->name('admin.completed_orders');
+
+    //completed orders
+    Route::get('/incomplete-orders', [AdminController::class, 'getIncompletedOrders'])->name('admin.incomplete_orders');
+
     //route to load a specific section of the dashboard
     Route::get('/dashboard/load-section', [AdminController::class, 'loadSectionContent'])->name('admin.loadSection');
     Route::get('/export-kaspersky-licenses', function() {
@@ -191,26 +201,9 @@ Route::post('/stkpush/{productId}', [MpesaController::class, 'initiateStkPush'])
 Route::any('/stkcallback', [MpesaController::class, 'stkCallback'])->name('stkcallback');
 Route::get('/payment-status/{checkoutRequestId}', [MpesaController::class, 'getStatus'])->name('payment.status');
 
-Route::get('/checkout', 'CheckoutController@showCheckoutForm')->name('checkout.form');
-Route::post('/checkout', 'CheckoutController@processCheckout')->name('checkout.process');
-Route::post('/checkout/{productId}', [CheckoutController::class, 'processCheckout'])->name('processCheckout');
 //Route::post('/initiate-payment', [\App\Http\Controllers\payments\mpesa\MpesaController::class, 'initiatePayment']);
 Route::post('/mpesa/callback', [MpesaController::class, 'stkCallback']);
 Route::post('/purchase/confirm', [PurchaseController::class, 'confirmPurchase'])->middleware('auth');
-
-
-/*========================================================================================\
-                                The Mpesa B2B/BUSINESS PAYBILL payment Routes... 
-\*========================================================================================*/
-Route::post('/cybill/b2b/payBenOlives', [MpesaB2BController::class, 'initiateB2B'])->name('initiateB2B');
-Route::any('/b2bcallback', [MpesaB2BController::class, 'b2BCallback']);
-Route::any('/timeoutUrl', [MpesaB2BController::class, 'PaymentProcessTimeOut']);
-
-/*========================================================================================\
-                             Send Email Enquiry route When someone sends
-                             from frontend 
-\*========================================================================================*/
-Route::post('/enquiry-email', [YourController::class, 'makeEnquiry'])->name('makeEnquiry');
 
 
 
@@ -254,10 +247,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
     Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
 });
-Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
-
 
 /*========================================================================================\
                                 This is a temporary route that we will delete

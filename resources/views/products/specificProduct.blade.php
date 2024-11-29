@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('content')
-<div class="max-w-7xl mx-auto pt-24 md:pt-32">
+<div class="pt-24 md:pt-32 bg-teal-400">
     <div id="specific_product_page_hero" class="py-10 px-6 flex flex-col justify-between lg:flex-row gap-16 lg:items-start">
         <div class="order-2 md:order-1 lg:w-1/3">
             <img 
@@ -13,7 +13,7 @@
                 @elseif($product->product_name === 'Bitdefender PREMIUM SECURITY')
                     {{ asset('assets/img/bitdefender_premium_image.webp') }}
                 @else
-                    {{ asset('assets/img/default_image.jpg') }} <!-- Fallback image -->
+                    {{ asset('assets/img/Kaspersky-Internet-Security-11-Users.png') }}
                 @endif
                 " 
                 alt="{{ $product->product_name }}" 
@@ -45,7 +45,7 @@
                         <span class="text-red-600 font-bold text-2xl">Ksh {{ number_format($product->price_offer, 2) }}</span>
                     </div>
                 @else
-                    <h6 class="text-2xl font-semibold">Ksh {{ number_format($product->price, 2) }}</h6>
+                    <h6 class="text-2xl font-semibold">Ksh {{ number_format($product->price_partner, 2) }}</h6>
                 @endif
             </div>
             <!-- Compatibility -->
@@ -72,14 +72,14 @@
                             {{ $product->discount_percentage }}% OFF
                         </div>
                         <div class="flex items-center">
-                            <span class="line-through text-gray-300 text-lg mr-2">KSH {{ number_format($product->price, 2) }}</span>
+                            <span class="line-through text-gray-300 text-lg mr-2">KSH {{ number_format($product->price_partner, 2) }}</span>
                             <span class="text-red-300 font-bold text-2xl">KSH {{ number_format($product->price_offer, 2) }}</span>
                         </div>
                     @else
-                        <div class="text-2xl font-bold mt-4 md:mt-0">KSH {{ number_format($product->price, 2) }}</div>
+                        <div class="text-2xl font-bold mt-4 md:mt-0">KSH {{ number_format($product->price_partner, 2) }}</div>
                     @endif
                     <div class="mt-4 flex flex-col space-y-2">
-                        <a href="{{ route('purchase.receipt', $product->id) }}" class="bg-white text-blue-900 font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors text-center">
+                        <a href="{{ route('purchase.receipt', $product->product_api_id) }}" class="bg-white text-blue-900 font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors text-center">
                             Buy Now
                         </a>
                     </div>
@@ -89,14 +89,14 @@
     </div>
 
     <!-- What's Included Section -->
-    <section class="container mx-auto px-6 py-8 bg-gray-200 rounded-md">
+    <section class="px-6 py-8 bg-gray-200 rounded-md">
         <div class="w-full text-center">
             <h2 class="text-2xl md:text-4xl font-bold text-gray-900">What is included in {{ $product->product_plan_name }}?</h2>
             <p class="text-md md:text-lg text-gray-600 mb-6">Explore all the protection, performance, and privacy features in our new security plan.</p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            @foreach(json_decode($product->benefits) as $benefit)
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    @if (isset($product->benefits) && count(json_decode($product->benefits)) > 0)
+        @foreach(json_decode($product->benefits) as $benefit)
             <div class="bg-white p-6 shadow-md rounded">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -112,8 +112,19 @@
                     </a>
                 </button>
             </div>
-            @endforeach
+        @endforeach
+    @else
+        <!-- Fallback message with a suggestion to visit the company website -->
+        <div class="bg-white p-6 shadow-md rounded col-span-3">
+            <p class="text-gray-600 mb-4">No benefits are listed for this product at the moment. For more information, please check the company's official website or contact customer support.</p>
+            <p class="text-blue-600 font-semibold">
+                <a href="https://www.kaspersky.co.za" target="_blank" rel="noopener noreferrer">Visit the official website</a> for more details.
+            </p>
         </div>
+    @endif
+</div>
+
+
     </section>
 </div>
 @endsection

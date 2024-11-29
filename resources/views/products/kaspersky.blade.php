@@ -119,11 +119,11 @@
                 <!-- Product Pricing -->
                 <div class="text-center text-xl font-semibold mb-6">
                     <!-- <span class="line-through text-red-500 text-lg italic">KSH {{ number_format($product['price']) }}/year</span><br> -->
-                    <span class="text-xl font-semibold text-black italic">Ksh {{ number_format($product->price) }}/month</span>
+                    <span class="text-xl font-semibold text-black italic">Ksh {{ number_format($product->price_partner) }}/month</span>
                 </div>
 
                 <!-- Learn More Button -->
-                <a href="{{ route('product.show_kaspersky_prod', ['id' => $product->product_api_id]) }}" 
+                <a href="{{ route('product.details', ['id' => $product->id]) }}" 
                     class="block bg-[#fc4b3b] text-white text-center py-3 rounded-md transition duration-300 ease-in-out transform hover:bg-[#fc4b3b]/90 hover:scale-105">
                     Buy product
                 </a>

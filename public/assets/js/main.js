@@ -526,8 +526,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (payButton && paymentForm) {
     // Show confirmation modal when pay with mpesa button is shown and disable scrolling
     payButton.addEventListener('click', () => {
-      console.log('payment Button clicked');
-      if (validateForm()) {
+      const subscriptionCheckbox = document.getElementById("subscriptionCheckbox");
+      const dataCheckbox = document.getElementById('dataCheckbox');
+      const errorMessage = document.getElementById("errorMessage");
+      if (!subscriptionCheckbox.checked || !dataCheckbox.checked) {
+        errorMessage.classList.remove("hidden");
+      } else {
+        errorMessage.classList.add("hidden");
+      }
+      if (subscriptionCheckbox.checked && dataCheckbox.checked && validateForm()) {
         confirmationModal.classList.remove('hidden');
         document.body.classList.add('no-scroll');
       }
@@ -565,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const city = paymentForm.city.value;
 
     if (!email || !phoneNumber || !country || !fullname || !address || !city) {
-      showCustomAlert('Please fill in all required fields.');
+      showCustomAlert('Please fill in All the fields they are required.');
       return false;
     }
     // Add regex for additional email validation as needed

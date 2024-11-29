@@ -53,7 +53,7 @@
         <p><strong>Transaction Date:</strong> {{ $transactionDate }}</p>
         
         <p><strong>To install the product, click the download link below</strong></p>
-        <p><a href="#" style="display: inline-block; padding: 10px 20px; background-color: #ff6f00; color: #ffffff; text-decoration: none; border-radius: 4px;">Download Link</a></p>
+        <p><a href="https://www.bitdefender.com/en-bz/consumer/thank-you" style="display: inline-block; padding: 10px 20px; background-color: #ff6f00; color: #ffffff; text-decoration: none; border-radius: 4px;">Download Link</a></p>
 
         <p>Thank you for choosing Cybill Software. If you have any questions, feel free to contact us.</p>
 

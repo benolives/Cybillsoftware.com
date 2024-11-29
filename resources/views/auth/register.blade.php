@@ -1,5 +1,20 @@
 @extends('layouts.auth_base')
 
+@if (request()->query('toast') === 'error')
+    <script>
+        // Show the toast message using Toastify
+        document.addEventListener("DOMContentLoaded", function() {
+            Toastify({
+                text: "Congratulations, Your Earnings just increased!!!",
+                duration: 3000,
+                gravity: "top",
+                position: 'center',
+                backgroundColor: "green",
+            })..showToast();
+        });
+    </script>
+@endif
+
 @section('header')
 <!-- Header -->
 <header class="hidden md:block fixed top-0 left-0 w-full z-40">
@@ -47,7 +62,7 @@
                     value="{{ old('name') }}"
                 >
                 @error('name')
-                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    <span class="text-red-500 text-sm mt-1 font-semibold">{{ $message }}</span>
                 @enderror
             </div>
 
@@ -64,7 +79,7 @@
                     value="{{ old('email') }}"
                 >
                 @error('email')
-                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    <span class="text-red-500 text-sm mt-1 font-semibold">{{ $message }}</span>
                 @enderror
             </div>
 
@@ -81,7 +96,7 @@
                     value="{{ old('name_of_company') }}"
                 >
                 @error('name_of_company')
-                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    <span class="text-red-500 text-sm mt-1 font-semibold">{{ $message }}</span>
                 @enderror
             </div>
 
@@ -108,7 +123,7 @@
                     </div>
                 </div>
                 @error('phone')
-                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    <span class="text-red-500 text-sm mt-1 font-semibold">{{ $message }}</span>
                 @enderror
             </div>
             
@@ -141,7 +156,7 @@
                     </svg>
                 </button>
                 @error('password')
-                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    <span class="text-red-500 text-sm mt-1 font-semibold">{{ $message }}</span>
                 @enderror
             </div>
 

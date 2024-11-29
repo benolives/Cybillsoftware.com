@@ -1,25 +1,8 @@
-<div class="page-inner">
-    <!-- Administator details section -->
-    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-        <div>
-            <h3 class="fw-bold mb-3">Admin Dashboard</h3>
-            <h6 class="op-7 mb-2 font-semibold">Welcome {{ Auth::user()->name }}</h6>
-        </div>
-        <div class="ms-md-auto py-2 py-md-0">
-            <form action="{{ route('logout') }}" method="POST" class="inline">
-                @csrf
-                <button type="submit" class="btn bg-[#fc4b3b] btn-round me-2 text-white">Logout</button>
-            </form>
-            <a href="javascript:void(0);" class="btn btn-primary btn-round section-item" data-section="new_partner_form">Add New Partner</a>
-        </div>
-    </div>
-    <!-- Navigations section -->
-    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-        <button type="button" class="btn btn-info" id="alert_demo_3_4">Info</button>
-        <button type="button" class="btn btn-success" id="alert_demo_3_3">Success</button>
-        <button type="button" class="btn btn-primary" id="alert_demo_6">Show me</button>
-    </div>
-    <!-- KPIs section -->
+@extends('layouts.admin_layout')
+
+@section('content')
+<!-- KPIs section -->
+<div>
     <h3 class="fw-bold mb-3">Key Performance Indicators</h3>
     <div class="row">
         <!-- Total partners card -->
@@ -35,7 +18,7 @@
                         <div class="col-7 col-stats">
                             <div class="numbers">
                                 <p class="card-category">Partners</p>
-                                <h4 class="card-title">40</h4>
+                                <h4 class="card-title">{{ $totalPartners }}</h4>
                             </div>
                         </div>
                     </div>
@@ -55,7 +38,7 @@
                         <div class="col-7 col-stats">
                             <div class="numbers">
                                 <p class="card-category">Customers</p>
-                                <h4 class="card-title">1303</h4>
+                                <h4 class="card-title">{{ $totalCustomers }}</h4>
                             </div>
                         </div>
                     </div>
@@ -75,7 +58,7 @@
                     <div class="col-7 col-stats">
                         <div class="numbers">
                             <p class="card-category">Revenue</p>
-                            <h4 class="card-title">1000000</h4>
+                            <h4 class="card-title">{{ $totalRevenue }}</h4>
                         </div>
                     </div>
                 </div>
@@ -95,7 +78,7 @@
                     <div class="col-7 col-stats">
                         <div class="numbers">
                             <p class="card-category">Commissions</p>
-                            <h4 class="card-title">100000</h4>
+                            <h4 class="card-title">{{ $totalCommissions }}</h4>
                         </div>
                     </div>
                 </div>
@@ -117,14 +100,14 @@
                         <div class="col-7 col-stats">
                             <div class="numbers">
                                 <p class="card-category">Products</p>
-                                <h4 class="card-title">200</h4>
+                                <h4 class="card-title">{{ $totalProducts }}</h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Active licences/product keys -->
+        <!-- Total product keys -->
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
                 <div class="card-body">
@@ -136,35 +119,35 @@
                         </div>
                         <div class="col-7 col-stats">
                             <div class="numbers">
-                                <p class="card-category">Active Licenses</p>
-                                <h4 class="card-title">150</h4>
+                                <p class="card-category">Product keys</p>
+                                <h4 class="card-title">{{ $totalProductKeys }}</h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Expired licenses/product keys -->
+        <!-- Instock prouducts -->
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
                 <div class="card-body">
                 <div class="row">
                     <div class="col-5">
                         <div class="icon-big text-center">
-                            <i class="fa-solid fa-key"></i>
+                            <i class="fa-solid fa-box"></i>
                         </div>
                     </div>
                     <div class="col-7 col-stats">
                         <div class="numbers">
-                            <p class="card-category">Expired Licenses</p>
-                            <h4 class="card-title">50</h4>
+                            <p class="card-category">Products Instock</p>
+                            <h4 class="card-title">{{ $inStockProducts }}</h4>
                         </div>
                     </div>
                 </div>
                 </div>
             </div>
         </div>
-        <!-- Products out of stock -->
+        <!-- Out of stock products -->
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
                 <div class="card-body">
@@ -177,7 +160,7 @@
                     <div class="col-7 col-stats">
                         <div class="numbers">
                             <p class="card-category">Products out of stock</p>
-                            <h4 class="card-title">50</h4>
+                            <h4 class="card-title">{{ $outOfStockProducts }}</h4>
                         </div>
                     </div>
                 </div>
@@ -186,7 +169,7 @@
         </div>
     </div>
     <div class="row">
-        <!-- Kaspersky products -->
+        <!-- Kaspersky total products -->
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
                 <div class="card-body">
@@ -197,14 +180,14 @@
                     <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                             <p class="card-category">Kaspersky</p>
-                            <h4 class="card-title">100</h4>
+                            <h4 class="card-title">{{ $totalkasperskyProducts }}</h4>
                         </div>
                     </div>
                 </div>
                 </div>
             </div>
         </div>
-        <!-- Bitdefender products -->
+        <!-- Bitdefender total products -->
         <div class="col-sm-6 col-md-3">
             <div class="card card-stats card-round">
                 <div class="card-body">
@@ -215,7 +198,7 @@
                         <div class="col col-stats ms-3 ms-sm-0">
                             <div class="numbers">
                                 <p class="card-category">Bitdefender</p>
-                                <h4 class="card-title">100</h4>
+                                <h4 class="card-title">{{ $totalbitdefenderProducts }}</h4>
                             </div>
                         </div>
                     </div>
@@ -263,71 +246,97 @@
             </div>
         </div>
     </div>
-    <!--- User/Partner managment section ----->
-    <div class="row mt-4">
-        <div class="col-xl-3 col-md-6">
-            <!-- Active Users / Partners Widget -->
-            <div class="card card-stats">
+    <!-- TABLES SECTION -->
+    <!-- PAYMENTS TO BENOLIVES TABLE -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Payments to Ben Olives</h4>
+                </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h5 class="card-title">Active Users</h5>
-                            <h2 class="fw-bold mb-0">120</h2>
+                    <!-- Dropdown for filtering status -->
+                    <div class="mb-3">
+                        <label for="statusFilter">Filter by Status:</label>
+                        <select id="statusFilter" class="form-control">
+                            <option value="">All</option>
+                            <option value="success">Success</option>
+                            <option value="pending">Pending</option>
+                            <option value="fail">Fail</option>
+                        </select>
+                    </div>
+
+                    <!-- Table for payments -->
+                    <div class="table-responsive">
+                        <table id="benOlivesTable" class="display table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Amount</th>
+                                    <th>Beneficiary</th>
+                                    <th>Cost</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                    <th>Reference No</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Amount</th>
+                                    <th>Beneficiary</th>
+                                    <th>Cost</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                    <th>Reference No</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach ($paymentsToBenOlives as $payment)
+                                <tr>
+                                    <td>{{ $payment->transaction_id }}</td>
+                                    <td>{{ $payment->amount }} {{ $payment->currency_code }}</td>
+                                    <td>{{ $payment->beneficiary_name }}</td>
+                                    <td>{{ $payment->charges ?? 'N/A' }}</td>
+                                    <td>{{ ucfirst($payment->transaction_status) }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($payment->transaction_completed_time)->format('Y-m-d H:i:s') }}</td>
+                                    <td>{{ $payment->transaction_reference_number }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Cards or Buttons for Account Balance and Total Transaction Cost -->
+                    <div class="row mt-4">
+                        <!-- Account Balance Card -->
+                        <div class="col-md-6">
+                            <div class="card bg-success text-white">
+                                <div class="card-header">
+                                    <h5>Account Balance</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="lead">KES 500,000.00</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="icon icon-info">
-                            <i class="fa fa-users"></i>
+
+                        <!-- Total Transaction Cost Card -->
+                        <div class="col-md-6">
+                            <div class="card bg-warning text-dark">
+                                <div class="card-header">
+                                    <h5>Total Transaction Cost</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="lead">KES 15,000.00</p> <!-- Replace with dynamic data -->
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6">
-            <!-- Inactive Users / Partners Widget -->
-            <div class="card card-stats">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h5 class="card-title">Inactive Users</h5>
-                            <h2 class="fw-bold mb-0">30</h2>
-                        </div>
-                        <div class="icon icon-warning">
-                            <i class="fa fa-user-slash"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6">
-            <!-- Role Management Widget -->
-            <div class="card card-stats">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <h5 class="card-title">Role Management</h5>
-                            <h2 class="fw-bold mb-0">Admin, Partner</h2>
-                        </div>
-                        <div class="icon icon-primary">
-                            <i class="fa fa-cogs"></i>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-round mt-3" data-bs-toggle="modal" data-bs-target="#assignRoleModal">Assign Roles</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-6">
-            <!-- Add New Partner Button -->
-            <div class="card card-stats">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Add New Partner</h5>
-                    <a href="javascript:void(0);" class="btn btn-success btn-round mt-3" data-section="new_partner_form">Add Partner</a>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Assign Admin Privileges Widget -->
     <div class="row mt-4">
         <div class="col-xl-6 col-md-12">
@@ -353,7 +362,6 @@
             </div>
         </div>
     </div>
-
     <!-- Modal for Role Management -->
     <div class="modal fade" id="assignRoleModal" tabindex="-1" aria-labelledby="assignRoleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -829,38 +837,5 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        // Example data for the Sales Performance Chart (monthly sales data)
-        var ctx = document.getElementById('salesPerformanceGraph').getContext('2d');
-        var salesPerformanceChart = new Chart(ctx, {
-            type: 'line', // Or 'bar' for a bar chart
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'], // Months
-                datasets: [{
-                    label: 'Kaspersky Sales',
-                    data: [12000, 19000, 15000, 25000, 22000, 30000], // Sales data
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }, {
-                    label: 'Bitdefender Sales',
-                    data: [8000, 13000, 12000, 20000, 19000, 25000], // Sales data
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
-
 </div>
+@endsection

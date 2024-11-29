@@ -2,18 +2,22 @@
 
 @section('content')
 <!-- Shopping Cart Page -->
-<div class="max-w-7xl mx-auto pt-24 md:pt-32 bg-gray-100">
+<div class="pt-24 md:pt-32 bg-teal-400">
     <section id="receipt_page_hero" class="container mx-auto py-10 p-6">
-        <!-- Title -->
+        <!-- Title you have made an excellent choice-->
         <div class="mb-8">
             <h1 class="text-center text-2xl md:text-4xl font-bold text-gray-900">You've made an excellent choice!</h1>
         </div>
         <!-- Product Details Section -->
         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center md:text-left">
-                <!-- Product -->
+                <!-- Product description-->
                 <div class="flex items-center space-x-4 py-4">
-                    <img src="{{ asset('assets/img/kaspersky_logo.png') }}" alt="{{ $product->name }} Logo" class="h-12 w-auto">
+                    <img 
+                        src="{{ asset($product->category_id == 2 ? 'assets/img/bitdefender.png' : 'assets/img/kaspersky_logo.png') }}" 
+                        alt="{{ $product->name }} Logo" 
+                        class="h-12 w-auto"
+                    >
                     <div class="flex flex-col">
                         <h3 class="text-lg font-semibold">{{ $product->product_name }}</h3>
                         <p class="text-sm text-gray-600">{{ $product->description }}</p>
@@ -34,10 +38,11 @@
                         </span>
                     </p>
                 </div>
+                <!-- price section -->
                 <div class="text-center mt-4 md:mt-0 md:w-1/4">
                     <div class="bg-red-600 text-white p-4 rounded-lg shadow-md">
                         <p class="text-xl font-bold">Total</p>
-                        <p class="text-3xl font-extrabold mt-2">KSH {{ number_format($product->price) }}</p>
+                        <p class="text-3xl font-extrabold mt-2">KSH {{ number_format($product->price_partner) }}</p>
                     </div>
                 </div>
             </div>
@@ -103,7 +108,7 @@
                     <input 
                         type="text" 
                         name="productPrice" 
-                        value="{{ $product->price}}" 
+                        value="{{ $product->price_partner}}" 
                         class="w-full p-3 border border-gray-300 rounded-lg" 
                         readonly 
                     />
@@ -116,16 +121,16 @@
                     <div>
                         <!-- Checkbox for Subscription & Auto-Renewal Conditions -->
                         <div class="flex items-start mb-4">
-                            <input type="checkbox" class="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300 rounded" required>
+                            <input type="checkbox" id="subscriptionCheckbox" class="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300 rounded" required>
                             <label class="ml-2 text-sm text-gray-600">
-                                I accept the <a href="#" class="text-blue-600 underline">Subscription & Auto-Renewal Conditions</a>, <a href="#" class="text-blue-600 underline">Terms & Conditions</a>, and <a href="#" class="text-blue-600 underline">Privacy Policy</a> of official reseller Nexway.
+                                I accept the <a href="#" class="text-blue-600 underline">Subscription & Auto-Renewal Conditions</a>, <a href="#" class="text-blue-600 underline">Terms & Conditions</a>, and <a href="#" class="text-blue-600 underline">Privacy Policy</a> of official reseller Cybill.
                             </label>
                         </div>
                         <!-- Checkbox for My Kaspersky account creation -->
                         <div class="flex items-start mb-4">
-                            <input type="checkbox" class="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300 rounded" required>
+                            <input type="checkbox" id="dataCheckbox" class="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300 rounded" required>
                             <label class="ml-2 text-sm text-gray-600">
-                                I am aware that if I do not have a My Kaspersky account, it will be created automatically using my email address so I can access my subscription. I understand and agree that my data will be stored as described in the <a href="#" class="text-blue-600 underline">Privacy Policy</a>.
+                                I understand and agree that my data will be stored as described in the <a href="#" class="text-blue-600 underline">Privacy Policy</a>.
                             </label>
                         </div>
                     </div>
@@ -134,6 +139,11 @@
                         <button type="button" id="payButton" class="w-full bg-red-600 text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-red-700 transition-colors">
                             Pay with MPESA
                         </button>
+                    </div>
+                    <!-- Error Message (Hidden by default) -->                        
+                    <div id="errorMessage" class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-lg mt-4 hidden">
+                        <strong class="font-semibold">Warning!</strong>
+                        <p>Please accept both the Subscription & Auto-Renewal Conditions and Account creation terms to proceed with payment.</p>
                     </div>
                 </div>
             </div>
@@ -156,7 +166,7 @@
     <div id="confirmationModal" class="hidden fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-80">
         <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md mx-4">
             <h2 class="text-xl font-semibold mb-4">Confirm Payment</h2>
-            <p>Are you sure you want to pay <strong>KSH {{ number_format($product->price) }}</strong> for <strong>{{ $product->product_name }}</strong>?</p>
+            <p>Are you sure you want to pay <strong>KSH {{ number_format($product->price_partner) }}</strong> for <strong>{{ $product->product_name }}</strong>?</p>
             <div class="flex flex-col sm:flex-row justify-end mt-4">
                 <button id="cancelButton" class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg mb-2 sm:mb-0 sm:mr-2">Cancel</button>
                 <button id="confirmButton" class="bg-red-600 text-white font-semibold py-2 px-4 rounded-lg">Sure, Pay</button>

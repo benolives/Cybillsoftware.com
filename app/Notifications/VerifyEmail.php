@@ -17,9 +17,8 @@ class VerifyEmail extends VerifyEmailBase
 
     /*==============================================================*\
         Build the email notification. Log the recipients email and
-        verification Url for debugging purpose. and then a mail message
-        with all contents
-        Include a custom view in resources/views/emails
+        verification Url for debugging purpose and then send a mail 
+        message with all contents
     \*===============================================================*/
     public function toMail($notifiable)
     {

@@ -36,35 +36,54 @@ class VerificationController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
-    public function sendVerificationEmail(Request $request)
-    {
-        $request->user()->sendEmailVerificationNotification();
-        return back()->with('message', 'Verification link sent!');
-    }
-
-   /*======================================================================
-        Show the email verification page after registration to notify
-        partner of the email that has been sent to their email they provided
-        if the user is has been verified redirect the user to the products page.
     */
+
     public function show(Request $request)
     {
         // Get the email from the request
         $email = $request->input('email');
 
-        // Return the blade page and pass the email
+        // Retrieve the user by email
+        $user = User::where('email', $email)->first();
+
+        // Check if the user exists and if their email is verified
+        if ($user && $user->hasVerifiedEmail()) {
+            // If email is verified, redirect them to select-products page
+            return redirect()->route('select-products');
+        }
+
+        // If email is not verified, send a session toast message
+        session()->flash('toast', [
+            'type' => 'error',
+            'message' => 'Not yet verified. Please check your inbox or spam for the verification link.'
+        ]);
+
+        // Return the verification page with the email
         return view('auth.verify-email', ['email' => $email]);
     }
 
-    /*==========================================================================
-        Resend the verification to the email incase the partner did not get it at
-        first attempt.
-    */
+    //resend verification link for emails
     public function resendVerificationEmail(Request $request)
     {
-        $request->user()->sendEmailVerificationNotification();
-        return redirect()->route('verification.notice')->with('message', 'A new verification email has been sent.');    
+
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        // Retrieve the email from the POST request
+        $email = $request->input('email');
+        
+        $user = User::where('email', $email)->first();
+
+        if ($user && !$user->hasVerifiedEmail()) {
+            // Resend the verification email
+            $user->sendEmailVerificationNotification();
+            Log::info('YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+            return redirect()->route('verification.notice')->with([
+                'message', 'A new verification email has been sent.',
+                'email', $email
+            ]);  
+        }
+        return redirect()->route('login')->with('status', 'Your email is already verified or email address not found.'); 
     }
 
     /*==================================================================================================
@@ -99,6 +118,6 @@ class VerificationController extends Controller
         auth()->login($user);
 
         // Redirect the user to the products page with a success message.
-        return redirect()->route('products.index')->with('toast', 'Your email has been verified. Welcome!');
+        return redirect()->route('select-products')->with('toast', 'Your email has been verified. Welcome!');
     }
 }
