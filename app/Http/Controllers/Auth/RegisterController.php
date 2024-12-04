@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Hash; // Hashing functionality for passwords
 use Illuminate\Support\Facades\Validator; // Validator for input validation
 use Illuminate\Auth\Events\Registered; // Event triggered upon user registration
 use Illuminate\Http\Request; // Request class for handling HTTP requests
-use Illuminate\Support\Facades\Log; // Logging functionality
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NewUserRegistered;
 
 // Import the custom rule
 use App\Rules\NotStartWith;
@@ -51,6 +52,10 @@ class RegisterController extends Controller
 
         // Create the user also from RegistersUsers trait
         $user = $this->create($request->all());
+
+        // Notify the admin (assuming admin has an ID of 1)
+        $admin = User::where('is_admin', true)->first();
+        $admin->notify(new NewUserRegistered($user));
 
         // Send the email verification notification this method is
         // defined in the user model

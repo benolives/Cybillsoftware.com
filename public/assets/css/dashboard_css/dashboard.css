@@ -84,6 +84,10 @@
     color: white;
 }
 
+/* Add this to your custom CSS file */
+.w-55px-important {
+    width: 55px !important;
+}
 
 /*==========================================================================================
         Here we are applying some stylings to the BenOlives payments main panel

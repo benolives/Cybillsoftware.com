@@ -21,3 +21,45 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+/*====================================================================================
+    This is to mark the notification as READ on the dashboard by the admin
+======================================================================================*/
+document.addEventListener('DOMContentLoaded', function () {
+    // Get all notification items
+    const notificationItems = document.querySelectorAll('.notification-item');
+
+    notificationItems.forEach(function (item) {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+            const notificationId = item.getAttribute('data-id');
+
+            // Create a new FormData object
+            const formData = new FormData();
+            formData.append('_token', '{{ csrf_token() }}');
+           
+            // Create the Ajax request (using Fetch API)
+            fetch(`/notifications/${notificationId}/read`, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                console.log('Response:', response); // Log the full response to inspect
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    // Find the parent <li> element and fade it out (you can just remove it if you prefer)
+                    item.closest('div').style.opacity = '0.5'; // Example of "marking it as read"
+                    item.closest('div').style.transition = 'opacity 0.5s ease'; // Smooth transition
+                    setTimeout(() => {
+                        item.closest('div').style.display = 'none'; // Optionally hide it after fade-out
+                    }, 500); // Wait for fade-out to complete before hiding
+                }
+            })
+            .catch(error => {
+                console.error('Error marking notification as read', error);
+            });
+        });
+    });
+});

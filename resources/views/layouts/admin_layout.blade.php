@@ -177,8 +177,8 @@
                                 </a>
                                 <div class="collapse-content collapse" id="product_keys">
                                     <ul class="nav nav-collapse">
-                                        <li class="section-item" data-section="kaspersky_keys">
-                                            <a href="javascript:void(0);">
+                                        <li>
+                                            <a href="{{ route('admin.kaspersky_keys') }}">
                                                 <span class="sub-item">Kaspersky keys</span>
                                             </a>
                                         </li>
@@ -236,8 +236,8 @@
                                 </a>
                                 <div class="collapse-content collapse" id="payments">
                                 <ul class="nav nav-collapse">
-                                    <li class="section-item" data-section="kaspersky_payments">
-                                        <a href="javascript:void(0);">
+                                    <li>
+                                        <a href="{{ route('admin.payments_to_benolives') }}">
                                             <span class="sub-item">BenOlives payments</span>
                                         </a>
                                     </li>
@@ -288,6 +288,7 @@
                     <!-- Navbar Header section for Mobile screen and smaller -->
                     <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                         <div class="container-fluid">
+                            <!-- search bar section -->
                             <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
                                 <div class="input-group search_bar">
                                     <div class="input-group-prepend">
@@ -302,7 +303,65 @@
                                     />
                                 </div>
                             </nav>
+
                             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                                <!-- This is the search button for mobile screen -->
+                                <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
+                                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-search animated fadeIn">
+                                        <form class="navbar-left navbar-form nav-search">
+                                        <div class="input-group">
+                                            <input
+                                            type="text"
+                                            placeholder="Search ..."
+                                            class="form-control"
+                                            />
+                                        </div>
+                                        </form>
+                                    </ul>
+                                </li>
+                                <!-- The notifications part When a new partner registers to the app-->
+                                <li class="nav-item topbar-icon dropdown hidden-caret">
+                                    <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-bell"></i>
+                                        <span class="notification">{{ $notifications->count() }}</span>
+                                    </a>
+                                    <ul class="dropdown-menu w-80 max-h-[300px] overflow-y-auto bg-white shadow-lg rounded-lg border border-gray-200 mt-2" aria-labelledby="notifDropdown">
+                                        <li>
+                                            <div class="dropdown-title text-[#2c2c64] font-semibold px-4 py-2">
+                                                You have {{ $notifications->count() }} new notification{{ $notifications->count() > 1 ? 's' : '' }}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="notif-scroll scrollbar-outer">
+                                                <div class="notif-center">
+                                                    @foreach(auth()->user()->unreadNotifications as $notification)
+                                                        <div class="border-b border-gray-200">
+                                                            <a href="#" class="notification-item flex items-center space-x-3 px-4 py-3 hover:bg-[#fc4b3b] hover:text-white transition-all" data-id="{{ $notification->id }}">
+                                                                <div class="notif-icon bg-[#2c2c64] text-white p-2 rounded-full">
+                                                                    <i class="fa fa-user-plus text-xl"></i>
+                                                                </div>
+                                                                <div class="notif-content flex flex-col space-y-1">
+                                                                    <span class="block text-sm font-medium">{{ $notification->data['message'] }}</span>
+                                                                    <span class="time text-xs text-gray-500">{{ $notification->created_at->diffForHumans() }}</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="see-all text-[#2c2c64] font-medium hover:text-[#fc4b3b] flex items-center justify-between px-4 py-2" href="javascript:void(0);">
+                                                See all notifications
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- The profile section of the header -->
                                 <li class="nav-item topbar-user dropdown hidden-caret">
                                     <a
                                         class="dropdown-toggle profile-pic"
@@ -416,24 +475,6 @@
         <!-- personal dashboard javascript file for styling -->
         <script src="{{ asset('assets/js/dashboard_js/dashboard.js') }}"></script>
         <script src="{{ asset('assets/js/dashboard_js/dataTables.js') }}"></script>
-        <script>
-            $(document).ready(function() {
-                // Initialize DataTable and store it in a variable
-                var table = $('#benOlivesTable').DataTable();
-
-                // Event listener for the status filter dropdown
-                $('#statusFilter').on('change', function() {
-                    var selectedStatus = $(this).val();
-
-                    // Apply the filter on the Status column (index 4)
-                    if (selectedStatus) {
-                        table.column(4).search(selectedStatus, true, false).draw();
-                    } else {
-                        table.column(4).search('').draw();
-                    }
-                });
-            });
-        </script>
         @stack('scripts')
     </body>
 </html>

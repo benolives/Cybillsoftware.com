@@ -13,6 +13,7 @@ use App\Models\Client;
 use App\Models\ProductKeys;
 use App\Models\Category;
 use App\Models\B2BPaymentBenOlives;
+use App\Models\KasperskyKey;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -34,8 +35,8 @@ class AdminController extends Controller
         $totalkasperskyProducts = Product::where('category_id', $kasperskyCategory->id)->count();
         $totalbitdefenderProducts = Product::where('category_id', $bitdefenderCategory->id)->count();
 
-        // Fetch all payments to Ben Olives
-        $paymentsToBenOlives = B2BPaymentBenOlives::all();
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
 
         return view('admin.sections.dashboardContent', compact(
             'totalCustomers', 
@@ -48,26 +49,32 @@ class AdminController extends Controller
             'inStockProducts',
             'totalkasperskyProducts',
             'totalbitdefenderProducts',
-            'paymentsToBenOlives'
+            'notifications'
         ));
     }
 
     //Show the partner creation form
     public function show_partner_form()
     {
-        return view('admin.sections.add_partner');
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
+        return view('admin.sections.add_partner', compact('notifications'));
     }
 
     //fetch all the client
     public function allClients()
     {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
         //retrieve all the clients
         $allClients = Client::all();
         $products = Product::all();
-        return view('admin.sections.all_clients', compact('allClients', 'products'));
+        return view('admin.sections.all_clients', compact('allClients', 'products', 'notifications'));
     }
     public function kasperskyClients()
     {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
         // Find the category with the slug 'kaspersky'
         $kasperskyCategory = Category::where('slug', 'kaspersky')->first();
         
@@ -91,11 +98,13 @@ class AdminController extends Controller
         }
 
         // Return to the view with the Kaspersky clients
-        return view('admin.sections.kaspersky_clients', compact('kasperskyClients'));
+        return view('admin.sections.kaspersky_clients', compact('kasperskyClients', 'notifications'));
     }
 
     //retrieve all partners
     public function getAllPartners(Request $request) {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
         // Start the query for non-admin users by default
         $query = User::query();
     
@@ -115,24 +124,46 @@ class AdminController extends Controller
         // Retrieve the filtered partners
         $allPartners = $query->get();
     
-        return view('admin.sections.all_partners', compact('allPartners'));
+        return view('admin.sections.all_partners', compact('allPartners', 'notifications'));
     }
 
     //retrieve completed orders
     public function getCompletedOrders() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
         // Fetch completed orders with their related product details
         $orders = Order::with('product')->where('status', 'completed')->get();
 
         // Pass the orders to the view
-        return view('admin.sections.completed_orders', compact('orders'));
+        return view('admin.sections.completed_orders', compact('orders', 'notifications'));
     }
 
     //retrieve Incompleted orders
     public function getIncompletedOrders() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
         // Fetch incompleted orders with their related product details
         $orders = Order::with('product')->where('status', 'pending')->get();
 
         // Pass the orders to the view
-        return view('admin.sections.pending_orders', compact('orders'));
+        return view('admin.sections.pending_orders', compact('orders', 'notifications'));
+    }
+
+    //retreive payments to benolives
+    public function getPaymentsToBenolives() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
+        // Fetch all payments to Ben Olives
+        $paymentsToBenOlives = B2BPaymentBenOlives::all();
+
+        return view('admin.sections.payments_to_benolives', compact('paymentsToBenOlives', 'notifications'));
+    }
+
+    public function getKasperskyKeys() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
+
+        $kaspersky_keys = KasperskyKey::all();
+        return view('admin.sections.kaspersky_keys', compact('notifications', 'kaspersky_keys'));
     }
 }

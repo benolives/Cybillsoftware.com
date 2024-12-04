@@ -25,6 +25,9 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ImportController;
 
 use App\Exports\KasperskyLicensesExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -180,8 +183,23 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //completed orders
     Route::get('/completed-orders', [AdminController::class, 'getCompletedOrders'])->name('admin.completed_orders');
 
-    //completed orders
+    //incompleted/pending orders
     Route::get('/incomplete-orders', [AdminController::class, 'getIncompletedOrders'])->name('admin.incomplete_orders');
+
+    //payments to benolives
+    Route::get('/payments-benolives', [AdminController::class, 'getPaymentsToBenolives'])->name('admin.payments_to_benolives');
+
+    //Route to get and display kaspesky keys
+    Route::get('/kaspersky-keys', [AdminController::class, 'getKasperskyKeys'])->name('admin.kaspersky_keys');
+
+    //Route to export the kaspersky keys
+    Route::get('export-kaspersky-keys', [ExportController::class, 'exportKasperskyKeys'])->name('exportKasperskyKeys');
+    //Route to import the kaspersky keys from an excel sheet
+    Route::post('/import-kaspersky-keys', [ImportController::class, 'importKasperskyKeys'])->name('importKasperskyKeys');
+
+    //mark notification as read.
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+
 
     //route to load a specific section of the dashboard
     Route::get('/dashboard/load-section', [AdminController::class, 'loadSectionContent'])->name('admin.loadSection');
