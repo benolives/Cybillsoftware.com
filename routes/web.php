@@ -172,6 +172,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::get('/add-partner', [AdminController::class, 'show_partner_form'])->name('admin.add_partner');
 
+    //post data for adding a new partner
+    Route::post('/add-new-partner', [AdminController::class, 'addNewPartnerToDatabase'])->name('admin.add_new_partner');
+
     //Route to retrieve all the clients
     Route::get('/all-clients', [AdminController::class, 'allClients'])->name('admin.all_clients');
     //Route to kaspersky clients
@@ -192,6 +195,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //Route to get and display kaspesky keys
     Route::get('/kaspersky-keys', [AdminController::class, 'getKasperskyKeys'])->name('admin.kaspersky_keys');
 
+    //Route to get and display bitdefender keys
+    Route::get('/bitdefender-keys', [AdminController::class, 'getBitdefenderKeys'])->name('admin.bitdefender_keys');
+
+
     //Route to export the kaspersky keys
     Route::get('export-kaspersky-keys', [ExportController::class, 'exportKasperskyKeys'])->name('exportKasperskyKeys');
     //Route to import the kaspersky keys from an excel sheet
@@ -200,6 +207,18 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     //mark notification as read.
     Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
 
+    //retreive bitdefender products
+    Route::get('/bitdefender-products', [AdminController::class, 'getBitdefenderProducts'])->name('admin.bitdefender_products');
+    
+    //retreive bitdefender page to add products
+    Route::get('/add-bitdefender-product', [AdminController::class, 'showFormPageToAddBitdefenderProduct'])->name('admin.getBitdefenderFormPage');
+
+    //add bitdefender  product to db
+    Route::post('/add-bitdefender-product', [AdminController::class, 'addNewBitdefenderProduct'])->name('admin.post_bitdefender_new_product');
+
+    Route::get('/success', [AdminController::class, 'handleSuccessfulAction'])->name('admin.success');
+    
+    Route::get('/error', [AdminController::class, 'handleErrorInstance'])->name('admin.error');
 
     //route to load a specific section of the dashboard
     Route::get('/dashboard/load-section', [AdminController::class, 'loadSectionContent'])->name('admin.loadSection');

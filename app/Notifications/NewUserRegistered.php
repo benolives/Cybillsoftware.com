@@ -12,9 +12,6 @@ class NewUserRegistered extends Notification
     use Queueable;
     protected $user;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct($user)
     {
         $this->user = $user;
@@ -30,7 +27,7 @@ class NewUserRegistered extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => 'New partner registered: ' . $this->user->name,
+            'message' => 'New partner: ' . $this->user->name,
             'url' => route('admin.dashboard')
         ];
     }

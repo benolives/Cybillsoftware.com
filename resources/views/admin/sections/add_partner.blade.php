@@ -1,6 +1,22 @@
 @extends('layouts.admin_layout')
 
 @section('content')
+<!-- Notification Div -->
+@if(session('success') || session('error'))
+    <div 
+        data-notify="container" 
+        class="col-10 col-xs-11 col-sm-4 alert @if(session('success')) alert-success @else alert-danger @endif" 
+        role="alert" 
+        data-notify-position="top-center" 
+        style="display: inline-block; margin: 0px auto; padding-left: 65px; position: fixed; transition: 0.5s ease-in-out; z-index: 1031; top: 20px; left: 0px; right: 0px;">
+        <button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 5px; z-index: 1033;">
+            ×
+        </button>
+        <span data-notify="icon" class="none"></span> 
+        <span data-notify="title">{{ session('success') ? 'Success' : 'Error' }}</span> 
+        <span data-notify="message">{{ session('success') ?? session('error') }}</span>
+    </div>
+@endif
 <div class="page-header">
     <h3 class="fw-bold mb-3">Forms</h3>
     <ul class="breadcrumbs mb-3">
@@ -31,7 +47,7 @@
             </div>
             <div class="card-body">
                 <!-- Form Starts Here -->
-                <form action="#" method="POST">
+                <form action="{{ route('admin.add_new_partner') }}" method="POST">
                     @csrf <!-- CSRF Token -->
                     <div class="row">
                         <!-- Column 1: Left Side (Name, Email, Company) for Desktop screen-->
@@ -118,8 +134,8 @@
                                 <input
                                     type="password"
                                     class="form-control @error('confirm_password') is-invalid @enderror"
-                                    id="confirm_password"
-                                    name="confirm_password"
+                                    id="password_confirmation"
+                                    name="password_confirmation"
                                     placeholder="Confirm Password"
                                 />
                                 @error('confirm_password')
@@ -139,3 +155,24 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const notifyContainer = document.querySelector('[data-notify="container"]');
+            
+            if (notifyContainer) {
+                // Add class 'show' to make the notification appear smoothly
+                notifyContainer.classList.add('show');
+                
+                // Automatically close the notification after 5 seconds
+                setTimeout(function() {
+                    // Add class 'hide' to make the notification fade out smoothly
+                    notifyContainer.classList.remove('show');
+                    notifyContainer.classList.add('hide');
+                }, 5000);
+            }
+        });
+    </script>
+@endpush

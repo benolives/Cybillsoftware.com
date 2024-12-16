@@ -15,6 +15,9 @@ use App\Models\Category;
 use App\Models\B2BPaymentBenOlives;
 use App\Models\KasperskyKey;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Notifications\NewUserRegistered;
 
 class AdminController extends Controller
 {
@@ -59,6 +62,63 @@ class AdminController extends Controller
         // Get notifications for the logged-in admin (assuming the admin is logged in)
         $notifications = auth()->user()->notifications()->latest()->take(5)->get();
         return view('admin.sections.add_partner', compact('notifications'));
+    }
+
+    //add partner to database:
+    public function addNewPartnerToDatabase(Request $request) {
+        // Validate the incoming data
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
+            'password' => 'required|string|min:8|confirmed', // Ensure password matches confirm_password
+            'company' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+        ]);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            // Custom error messages
+            $errorMessage = 'Oops! Something went wrong. Please check the details and try again.';
+
+            // Check specific errors and modify message accordingly
+            if ($validator->errors()->has('email')) {
+                $errorMessage = 'This email address is already in use. Please try another email.';
+            } elseif ($validator->errors()->has('password')) {
+                $errorMessage = 'Your passwords don\'t match. Please ensure both fields are identical.';
+            } elseif ($validator->errors()->has('phone')) {
+                $errorMessage = 'Please enter a valid phone number.';
+            }
+
+            // Store the error message in the session
+            session()->flash('error', $errorMessage);
+
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        // Create the user instance (if validation passes)
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->utype = 'USR';
+        $user->name_of_company = $request->input('company');
+        $user->phone = $request->input('phone');
+        $user->remember_token = null;
+        $user->email_verified_at = Carbon::now();
+        $user->created_at = Carbon::now();
+        $user->updated_at = Carbon::now();
+        $user->is_admin = 0;
+
+        // Save the user to the database
+        $user->save();
+
+        session()->flash('success', 'New partner added successfully!');
+        Log::info("New partner added successfully: " . $user->name);
+
+        // Notify the admin that new user has been added
+        $admin = User::where('is_admin', true)->first();
+        $admin->notify(new NewUserRegistered($user));
+
+        return redirect()->route('admin.dashboard');
     }
 
     //fetch all the client
@@ -159,11 +219,174 @@ class AdminController extends Controller
         return view('admin.sections.payments_to_benolives', compact('paymentsToBenOlives', 'notifications'));
     }
 
+    //kaspersky keys
     public function getKasperskyKeys() {
         // Get notifications for the logged-in admin (assuming the admin is logged in)
         $notifications = auth()->user()->notifications()->latest()->take(5)->get();
 
         $kaspersky_keys = KasperskyKey::all();
         return view('admin.sections.kaspersky_keys', compact('notifications', 'kaspersky_keys'));
+    }
+
+    //bitdefender keys
+    public function getBitdefenderKeys() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
+
+        $bitdefender_keys = BitdefenderKey::all();
+        return view('admin.sections.bitdefender_keys', compact('notifications', 'kaspersky_keys'));
+    
+    }
+
+    //retreve bitdefender products
+    public function getBitdefenderProducts() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
+
+        // Retrieve all products with the slug 'bitdefender'
+        $products = Product::where('slug', 'bitdefender')->get();
+
+        return view('admin.sections.bitdefender_products', compact('products', 'notifications'));
+    }
+
+    //retrieve the form page to add bidefender products
+    public function showFormPageToAddBitdefenderProduct() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
+
+        return view('admin.sections.add_bitdefender_product', compact('notifications'));
+    }
+
+    //add bitdefender product to the database.
+    public function addNewBitdefenderProduct(Request $request)
+    {
+        // Log the incoming request data
+        Log::info('Incoming Bitdefender Product Data:', $request->all());
+
+        // Convert some values from string to number (float)
+        $discountPercentage = floatval($request->input('discount_percentage', 0));
+        $priceOffer = floatval($request->input('price_offer', 0));
+
+        // Log the converted values to check them
+        Log::info("Converted discount_percentage: $discountPercentage");
+        Log::info("Converted price_offer: $priceOffer");
+
+        // Validate incoming data
+        Log::info("Validating incoming data...");
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'discount_percentage' => 'nullable|numeric',
+            'compatibility' => 'nullable|array',
+            'price' => 'required|numeric',
+            'price_offer' => 'nullable|numeric',
+            'stock_status' => 'required|in:instock,outofstock',
+            'commission_percentage' => 'nullable|numeric',
+            'slug' => 'nullable|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            Log::error("Validation failed for bitdefender product data", [
+                'errors' => $validator->errors(),
+            ]);
+            return redirect()->route('admin.error')
+                ->with('message', 'Validation failed. Please check the input fields.')
+                ->with('icon', 'error-icon') // Example icon, customize with Kai Admin or FontAwesome icon
+                ->with('details', $validator->errors());
+        }
+
+        // Log successful validation
+        Log::info("Validation passed successfully");
+
+        // Fetch the category whose slug is 'bitdefender'
+        Log::info("Fetching category with slug 'bitdefender'...");
+        $category = Category::where('slug', 'bitdefender')->first();
+
+        if (!$category) {
+            Log::error("Category 'bitdefender' not found.");
+            return redirect()->route('admin.error')
+                ->with('message', 'Category "bitdefender" not found.')
+                ->with('icon', 'error-icon') // Customize this
+                ->with('details', 'The category for Bitdefender was not found in the database. Please contact support.');
+        }
+
+        // Log the category found
+        Log::info("Category found: ", ['category_id' => $category->id, 'category_slug' => $category->slug]);
+
+        // Prepare the data to save, including fields not sent from the frontend
+        $productData = [
+            'category_id' => $category->id,
+            'product_name' => $request->input('product_name'),
+            'product_plan_name' => null,
+            'description' => $request->input('description'),
+            'reviews' => 0,
+            'discount_percentage' => $discountPercentage,
+            'compatibility' => json_encode($request->input('compatibility', [])),
+            'benefits' => json_encode([]),
+            'learn_more_link' => null,
+            'product_link' => null,
+            'price' => $request->input('price'),
+            'price_offer' => $priceOffer,
+            'price_partner' => null,
+            'stock_status' => $request->input('stock_status'),
+            'quantity' => 0,
+            'image_url' => null,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'commission_percentage' => $request->input('commission_percentage', 0),
+            'last_updated_at' => Carbon::now(),
+            'product_api_id' => null,
+            'slug' => $request->input('slug'),
+        ];
+
+        try {
+            // Log that product creation is starting
+            Log::info("Creating new Bitdefender product in the database...");
+            $product = Product::create($productData);
+
+            // Log the product creation success
+            Log::info("Product created successfully: ", ['product_id' => $product->id]);
+
+            // After creation, update the product_api_id to match the product's id
+            $product->product_api_id = $product->id;
+
+            // Log before saving the updated product
+            Log::info("Updating product_api_id for product with ID: {$product->id}");
+            $product->save();
+
+            // Redirect to success page with product details
+            return redirect()->route('admin.success')
+                ->with('message', 'Bitdefender product added successfully!')
+                ->with('icon', 'success-icon')
+                ->with('product', $product)
+                ->with('allProductsLink', route('admin.bitdefender_products'));
+        } catch (\Exception $e) {
+            // Log the error if the product creation or update fails
+            Log::error("Error while adding product", [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+            ]);
+            return redirect()->route('admin.error')
+                ->with('message', 'Error while adding product')
+                ->with('icon', 'error-icon') // Customize this
+                ->with('details', 'An error occurred while trying to add the product. Please try again or contact support.');
+        }
+    }
+
+    public function handleSuccessfulAction() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
+
+        // Get product data from the session
+        $product = session('product');
+
+        return view('admin.sections.success', compact('notifications', 'product'));
+    }
+
+    public function handleErrorInstance() {
+        // Get notifications for the logged-in admin (assuming the admin is logged in)
+        $notifications = auth()->user()->notifications()->latest()->take(5)->get();
+
+        return view('admin.sections.error', compact('notifications'));
     }
 }

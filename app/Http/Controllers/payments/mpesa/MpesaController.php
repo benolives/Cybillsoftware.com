@@ -766,7 +766,6 @@ class MpesaController extends Controller
     // This is the callback that Benolives will trigger when giving us the details of the product
     public function benolivesPaymentCallback(Request $request)
     {
-        return response()->json(['message' => "sucess"], 200);
         // Log the incoming JSON data from the callback
         Log::info('Received payment callback from Benolives:', $request->all());
 

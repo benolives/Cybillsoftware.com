@@ -49,6 +49,13 @@
             text-decoration: uppercase;
             font-weight: bold;
         }
+        .importBtn:hover {
+            background-color: #2c2c64;
+            color: #000;
+        }
+        .importForm {
+            margin-bottom: 2rem;
+        }
     </style>
 @endpush
 
@@ -168,7 +175,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('importKasperskyKeys') }}" method="POST" enctype="multipart/form-data">
+                                    <!-- File to upload the form -->
+                                    <form action="{{ route('importKasperskyKeys') }}" method="POST" enctype="multipart/form-data" class="importForm">
                                         @csrf
                                         <div class="form-group">
                                             <label for="file">Choose Excel File</label>
@@ -176,6 +184,19 @@
                                         </div>
                                         <button type="submit" class="btn importBtn">Import</button>
                                     </form>
+
+                                    <!-- Import Guidelines -->
+                                    <div class="alert alert-info">
+                                        <strong>Guidelines for Importing Data:</strong>
+                                        <ul>
+                                            <li>The file must be in <strong>Excel (.xlsx)</strong> format.</li>
+                                            <li>The first row should contain the column headers: <strong>product_id</strong>, <strong>key_code</strong>, and <strong>sold_status</strong>.</li>
+                                            <li><strong>product_id:</strong> The ID of the product (must exist in the database).</li>
+                                            <li><strong>key_code:</strong> The unique license key for the product.</li>
+                                            <li><strong>sold_status:</strong> The status of the key (0 for "Not Sold", 1 for "Sold").</li>
+                                            <li>Ensure there are no empty rows in the file.</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -188,6 +209,7 @@
 @endsection
 
 @push('scripts')
+    <!-- This script registers the table to the dataTables to make it dynamic -->
     <script>
         $(document).ready(function() {
             // Initialize DataTable and store it in a variable

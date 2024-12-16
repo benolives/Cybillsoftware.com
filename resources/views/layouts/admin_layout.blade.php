@@ -20,6 +20,22 @@
         @stack('styles')
     </head>
     <body>
+        <!-- Notification Div -->
+        @if(session('success') || session('error'))
+            <div 
+                data-notify="container" 
+                class="col-10 col-xs-11 col-sm-4 alert @if(session('success')) alert-success @else alert-danger @endif" 
+                role="alert" 
+                data-notify-position="top-center" 
+                style="display: inline-block; margin: 0px auto; padding-left: 65px; position: fixed; transition: 0.5s ease-in-out; z-index: 1031; top: 20px; left: 0px; right: 0px;">
+                <button id="close_notification_popup" type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 5px; z-index: 1033;">
+                    ×
+                </button>
+                <span data-notify="icon" class="none"></span> 
+                <span data-notify="title">{{ session('success') ? 'Success' : 'Error' }}</span> 
+                <span data-notify="message">{{ session('success') ?? session('error') }}</span>
+            </div>
+        @endif
         <div class="wrapper">
             <!-- Sidebar section -->
             <div class="sidebar" data-background-color="dark">
@@ -160,7 +176,7 @@
                                         </a>
                                     </li>
                                     <li class="section-item" data-section="bitdefender_products">
-                                        <a href="javascript:void(0);">
+                                        <a href="{{ route('admin.bitdefender_products') }}">
                                             <span class="sub-item">Bitdefender</span>
                                         </a>
                                     </li>
@@ -182,8 +198,8 @@
                                                 <span class="sub-item">Kaspersky keys</span>
                                             </a>
                                         </li>
-                                        <li class="section-item" data-section="bitdefender_keys">
-                                            <a href="javascript:void(0);">
+                                        <li>
+                                            <a href="{{ route('admin.bitdefender_keys') }}">
                                                 <span class="sub-item">Bitdefender Keys</span>
                                             </a>
                                         </li>
@@ -285,7 +301,7 @@
                         </div>
                         <!-- End Logo Header -->
                     </div>
-                    <!-- Navbar Header section for Mobile screen and smaller -->
+                    <!-- Navbar Header section-->
                     <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                         <div class="container-fluid">
                             <!-- search bar section -->
@@ -322,30 +338,67 @@
                                         </form>
                                     </ul>
                                 </li>
+                                <!-- This is the notification incase there is an error or warning -->
+                                <li class="nav-item topbar-icon dropdown hidden-caret">
+                                    <a class="nav-link-error nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                        <span class="notification notification-error">1</span>
+                                    </a>
+                                    <ul class="dropdown-menu notifications-dropdown-menu" aria-labelledby="notifDropdown">
+                                        <li>
+                                            <div class="dropdown-title">You have 1 notification</div>
+                                        </li>
+                                        <!-- Notification List -->
+                                        <li>
+                                            <div class="notif-center">
+                                                <div class="border-b border-gray-200">
+                                                    <a href="#" class="notification-item" data-id="1">
+                                                        <!-- Custom Icons for Error and Warning -->
+                                                        <div class="notification-user-icon">
+                                                            <i class="fa fa-exclamation-triangle text-xl text-yellow-500"></i>
+                                                        </div>
+
+                                                        <div class="notification-content">
+                                                            <span class="block text-sm font-bold">Message</span>
+                                                            <span class="time">Now</span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <a class="see-all text-[#2c2c64] font-medium hover:text-[#fc4b3b] flex items-center justify-between px-4 py-2 hover:underline focus:outline-none" href="javascript:void(0);">
+                                                See all notifications
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <!-- The notifications part When a new partner registers to the app-->
                                 <li class="nav-item topbar-icon dropdown hidden-caret">
                                     <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-bell"></i>
                                         <span class="notification">{{ $notifications->count() }}</span>
                                     </a>
-                                    <ul class="dropdown-menu w-80 max-h-[300px] overflow-y-auto bg-white shadow-lg rounded-lg border border-gray-200 mt-2" aria-labelledby="notifDropdown">
+                                    <ul class="dropdown-menu notifications-dropdown-menu" aria-labelledby="notifDropdown">
                                         <li>
-                                            <div class="dropdown-title text-[#2c2c64] font-semibold px-4 py-2">
+                                            <div class="dropdown-title">
                                                 You have {{ $notifications->count() }} new notification{{ $notifications->count() > 1 ? 's' : '' }}
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="notif-scroll scrollbar-outer">
+                                            <div>
                                                 <div class="notif-center">
                                                     @foreach(auth()->user()->unreadNotifications as $notification)
                                                         <div class="border-b border-gray-200">
-                                                            <a href="#" class="notification-item flex items-center space-x-3 px-4 py-3 hover:bg-[#fc4b3b] hover:text-white transition-all" data-id="{{ $notification->id }}">
-                                                                <div class="notif-icon bg-[#2c2c64] text-white p-2 rounded-full">
+                                                            <a href="#" class="notification-item" data-id="{{ $notification->id }}">
+                                                                <div class="notification-user-icon">
                                                                     <i class="fa fa-user-plus text-xl"></i>
                                                                 </div>
-                                                                <div class="notif-content flex flex-col space-y-1">
-                                                                    <span class="block text-sm font-medium">{{ $notification->data['message'] }}</span>
-                                                                    <span class="time text-xs text-gray-500">{{ $notification->created_at->diffForHumans() }}</span>
+                                                                <div class="notification-content">
+                                                                    <span class="block text-sm font-bold">{{ $notification->data['message'] }}</span>
+                                                                    <span class="time">{{ $notification->created_at->diffForHumans() }}</span>
                                                                 </div>
                                                             </a>
                                                         </div>
@@ -354,7 +407,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <a class="see-all text-[#2c2c64] font-medium hover:text-[#fc4b3b] flex items-center justify-between px-4 py-2" href="javascript:void(0);">
+                                            <a class="see-all text-[#2c2c64] font-medium hover:text-[#fc4b3b] flex items-center justify-between px-4 py-2 hover:underline focus:outline-none" href="javascript:void(0);">
                                                 See all notifications
                                                 <i class="fa fa-angle-right"></i>
                                             </a>
@@ -429,9 +482,11 @@
                             <div class="ms-md-auto py-2 py-md-0">
                                 <form action="{{ route('logout') }}" method="POST" class="inline">
                                     @csrf
-                                    <button type="submit" class="btn bg-[#fc4b3b] btn-round text-white">Logout</button>
+                                    <button type="submit" class="logout-btn">Logout</button>
                                 </form>
-                                <a href="{{ route('admin.add_partner') }}" class="btn btn-primary btn-round section-item">Add New Partner</a>
+                                <a href="{{ route('admin.add_partner') }}">
+                                    <button class="add-new-partner-btn">Add New Partner</button>
+                                </a>
                             </div>
                         </div>
                         <!-- Navigations section -->
@@ -476,5 +531,30 @@
         <script src="{{ asset('assets/js/dashboard_js/dashboard.js') }}"></script>
         <script src="{{ asset('assets/js/dashboard_js/dataTables.js') }}"></script>
         @stack('scripts')
+
+        <script>
+            // Wait for DOM to be fully loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                const notifyContainer = document.querySelector('[data-notify="container"]');
+                const close_notification_popup = document.getElementById('close_notification_popup');
+                
+                if (notifyContainer) {
+                    // Add class 'show' to make the notification appear smoothly
+                    notifyContainer.classList.add('show');
+                    
+                    // Automatically close the notification after 5 seconds
+                    setTimeout(function() {
+                        // Add class 'hide' to make the notification fade out smoothly
+                        notifyContainer.classList.remove('show');
+                        notifyContainer.classList.add('hide');
+                    }, 15000);
+                }
+
+                close_notification_popup.addEventListener('click', function() {
+                    notifyContainer.classList.remove('show');
+                    notifyContainer.classList.add('hide');
+                })
+            });
+        </script>
     </body>
 </html>

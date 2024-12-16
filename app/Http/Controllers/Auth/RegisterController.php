@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller; // Base controller class
-use App\Models\User; // User model for interacting with the users table
-use Illuminate\Foundation\Auth\RegistersUsers; // Trait that provides registration functionality
-use Illuminate\Support\Facades\Hash; // Hashing functionality for passwords
-use Illuminate\Support\Facades\Validator; // Validator for input validation
-use Illuminate\Auth\Events\Registered; // Event triggered upon user registration
-use Illuminate\Http\Request; // Request class for handling HTTP requests
+use App\Http\Controllers\Controller;
+use App\Models\User; 
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\NewUserRegistered;
